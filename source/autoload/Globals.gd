@@ -1,6 +1,6 @@
 extends Node
 
-const MAX_ACTIONS := 2
+const MAX_ACTIONS := 3
 
 var used_actions := 0
 var gold := 100:
@@ -11,3 +11,8 @@ var population := 0:
 	set(_population):
 		population = _population
 		EventBus.emit_signal("update_population", population)
+
+# Used and refreshed after each battle
+var casualties := 0
+var kills := 0
+var earned_gold := 0

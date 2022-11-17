@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dnrjt1f7bs02w"]
+[gd_scene load_steps=30 format=3 uid="uid://dnrjt1f7bs02w"]
 
 [ext_resource type="Script" path="res://source/game/units/Player/Player.gd" id="1_0pmxq"]
 [ext_resource type="Script" path="res://source/game/units/Player/StateManager.gd" id="2_b4uvq"]
@@ -17,9 +17,10 @@
 [ext_resource type="AudioStream" uid="uid://c0htaj0tukf04" path="res://assets/sound/fx_cheer_2.ogg" id="15_3dw7q"]
 [ext_resource type="AudioStream" uid="uid://cslpc2qg2lh18" path="res://assets/sound/fx_cheer_3.ogg" id="16_bh4g4"]
 [ext_resource type="AudioStream" uid="uid://d0dw402fcinm" path="res://assets/sound/fx_cheer_4.ogg" id="17_iebhv"]
+[ext_resource type="AudioStream" uid="uid://bnijco8s1k2ev" path="res://assets/sound/fx_pop_walk.wav" id="18_vbekh"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_j7rhl"]
-size = Vector2(4, 4)
+[sub_resource type="CircleShape2D" id="CircleShape2D_s37hy"]
+radius = 2.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_23fid"]
 size = Vector2(128, 128)
@@ -131,7 +132,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [0, 1]
+"values": [1, 0]
 }
 
 [sub_resource type="Animation" id="Animation_3vohj"]
@@ -165,12 +166,13 @@ _data = {
 [node name="Unit" type="CharacterBody2D" groups=["player_unit"]]
 collision_layer = 2
 collision_mask = 7
+motion_mode = 1
 script = ExtResource("1_0pmxq")
 stats = ExtResource("2_i5lbw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -2)
-shape = SubResource("RectangleShape2D_j7rhl")
+shape = SubResource("CircleShape2D_s37hy")
 
 [node name="StateManager" type="Node" parent="." node_paths=PackedStringArray("initial_state", "look_for_target_state", "retreat_state", "cheer_state")]
 script = ExtResource("2_b4uvq")
@@ -211,6 +213,8 @@ animation = "cheer"
 [node name="FOVRadius" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 68
+monitoring = false
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FOVRadius"]
 position = Vector2(0, -8)
@@ -225,10 +229,10 @@ offset_bottom = 28.0
 
 [node name="ActionDisplay" parent="." instance=ExtResource("9_vjts4")]
 visible = false
-offset_left = -58.0
-offset_top = -72.0
-offset_right = -58.0
-offset_bottom = -72.0
+offset_left = -44.0
+offset_top = -47.0
+offset_right = -44.0
+offset_bottom = -47.0
 
 [node name="SelectionIndicator" type="Sprite2D" parent="."]
 visible = false
@@ -272,6 +276,42 @@ script = ExtResource("14_uf5yi")
 
 [node name="RandomPitchAudioStreamPlayer4" type="AudioStreamPlayer" parent="CheerAudios"]
 stream = ExtResource("17_iebhv")
+script = ExtResource("14_uf5yi")
+
+[node name="AvoidSolids" type="Node2D" parent="."]
+
+[node name="Top" type="RayCast2D" parent="AvoidSolids"]
+rotation = -1.57079
+enabled = false
+target_position = Vector2(16, 0)
+collision_mask = 3
+
+[node name="TopRight" type="RayCast2D" parent="AvoidSolids"]
+rotation = -0.785397
+enabled = false
+target_position = Vector2(16, 0)
+collision_mask = 3
+
+[node name="Right" type="RayCast2D" parent="AvoidSolids"]
+enabled = false
+target_position = Vector2(16, 0)
+collision_mask = 3
+
+[node name="BottomRight" type="RayCast2D" parent="AvoidSolids"]
+rotation = 0.785397
+enabled = false
+target_position = Vector2(16, 0)
+collision_mask = 3
+
+[node name="Bottom" type="RayCast2D" parent="AvoidSolids"]
+rotation = 1.57079
+enabled = false
+target_position = Vector2(16, 0)
+collision_mask = 3
+
+[node name="FxStep" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("18_vbekh")
+volume_db = -20.0
 script = ExtResource("14_uf5yi")
 
 [connection signal="body_exited" from="CommandArea" to="." method="_on_command_area_body_exited"]

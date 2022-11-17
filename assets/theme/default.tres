@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bgrllsi3i5dkj"]
+
+[ext_resource type="FontFile" uid="uid://sx3rxhkkcc1g" path="res://assets/fonts/Big Apple 3PM.ttf" id="1_eywfk"]
+
+[resource]
+default_font = ExtResource("1_eywfk")
+default_font_size = 24

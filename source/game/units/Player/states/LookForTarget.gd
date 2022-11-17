@@ -2,6 +2,20 @@ extends BasePlayerState
 
 @export var attack_state: BasePlayerState
 
+func enter() -> void:
+	super()
+	player.fov_radius.monitoring = true
+	
+	for ray in player.avoid_solids.get_children():
+		ray.enabled = true
+
+func exit() -> void:
+	super()
+	player.fov_radius.monitoring = false
+	
+	for ray in player.avoid_solids.get_children():
+		ray.enabled = false
+
 func get_closest_enemy() -> CharacterBody2D:
 	var _closest_dist := 9999
 	var _target: CharacterBody2D

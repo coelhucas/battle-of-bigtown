@@ -9,10 +9,11 @@ var _selected_option: int = 0:
 	set(_selected):
 		if _selected_option != _selected:
 			var _previous_opt: Control = container.get_child(_selected_option)
-			_previous_opt.selection_indicator.hide()
+			if is_instance_valid(_previous_opt):
+				_previous_opt.selection_indicator.hide()
 		
 		if container.get_child_count() == 0: return
-		_selected_option = _selected
+		_selected_option = clamp(_selected, 0, container.get_child_count() - 1)
 		var _new_opt: Control = container.get_child(_selected_option)
 		_new_opt.selection_indicator.show()
 
@@ -22,6 +23,7 @@ func _ready() -> void:
 	set_process_input(false)
 	
 func _input(event: InputEvent):
+	_selected_option = clamp(_selected_option, 0, container.get_child_count() - 1)
 	if event.is_action_pressed("action_1") and container.get_children().size():
 		EventBus.emit_signal(EventBus.attempt_purchase.get_name(), container.get_child(_selected_option).stats)
 	

@@ -26,4 +26,4 @@ army = [SubResource("Resource_l3juv"), SubResource("Resource_0pqwf")]
 population = null
 hostile = false
 base_strength = 1.0
-population_size = 10.0
+population_size = 150.0

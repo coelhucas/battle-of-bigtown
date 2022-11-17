@@ -2,6 +2,16 @@ extends BaseEnemyState
 
 @export var attack_state: BaseEnemyState
 
+const MAXIMUM_PURSUIT_RANGE := 48
+
+func enter() -> void:
+	super()
+	player.fov_radius.monitoring = true
+	
+	for ray in player.avoid_solids.get_children():
+		ray.enabled = true
+
+
 func get_closest_enemy() -> CharacterBody2D:
 	var _closest_dist := 9999
 	var _target: CharacterBody2D
@@ -11,10 +21,28 @@ func get_closest_enemy() -> CharacterBody2D:
 			_target = _body
 	return _target
 
+
+func exit() -> void:
+	super()
+	player.fov_radius.monitoring = false
+	
+	for ray in player.avoid_solids.get_children():
+		ray.enabled = false
+
+
 func update() -> BaseEnemyState:
+	if not player.fov_radius.monitoring:
+		player.fov_radius.monitoring = true
+	
 	if is_instance_valid(player.target):
 		player.direction = player.global_position.direction_to(player.target.global_position)
+		
+		if player.global_position.distance_to(player.target.global_position) > MAXIMUM_PURSUIT_RANGE:
+			player.target = null
+			return null
+		
 		if player.global_position.distance_to(player.target.global_position) <= player.attack_range:
+			player.fov_radius.monitoring = false
 			return attack_state
 	elif player.fov_radius.has_overlapping_bodies():
 		player.target = get_closest_enemy()

@@ -1,10 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://bq4dbqhylplg1"]
+[gd_scene load_steps=4 format=3 uid="uid://bq4dbqhylplg1"]
 
 [ext_resource type="Texture2D" uid="uid://ilkmew2i6vnb" path="res://assets/human.png" id="1_272je"]
+[ext_resource type="Texture2D" uid="uid://21nokruvidog" path="res://assets/blood.png" id="2_a0jmg"]
+[ext_resource type="Script" path="res://source/custom_nodes/RandomSpriteFrame2D.gd" id="3_e4ase"]
 
 [node name="DeadBody" type="Sprite2D"]
-modulate = Color(0.380392, 0.380392, 0.380392, 0.517647)
+modulate = Color(1, 1, 1, 0.407843)
 texture_filter = 1
 texture = ExtResource("1_272je")
 hframes = 12
 frame = 11
+
+[node name="Blood" type="Sprite2D" parent="."]
+texture = ExtResource("2_a0jmg")
+hframes = 5
+script = ExtResource("3_e4ase")

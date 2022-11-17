@@ -18,4 +18,4 @@ func _input(event: InputEvent):
 	if event.is_action_pressed("action_1"):
 		hide()
 		set_process_input(false)
-		get_viewport().set_input_as_handled()
+	get_viewport().set_input_as_handled()

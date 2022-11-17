@@ -40,10 +40,14 @@ func _ready() -> void:
 func _on_battle_finished(_winner: Enums.Team) -> void:
 	print("Winner team was %s" % Enums.Team.keys()[_winner])
 	EventBus.emit_signal("battle_finished", _winner)
-	result_screen.open()
+
 	
 	if _winner == Enums.Team.PLAYER:
-		Globals.gold += last_location.get_gold_prize()
+		var _gold := last_location.get_gold_prize()
+		Globals.gold += _gold
+		result_screen.open(_winner, _gold)
+	else:
+		result_screen.open(_winner)
 
 func _on_left_battle():
 	var _map_scene: Node2D = world.change_scene(map)

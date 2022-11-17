@@ -19,12 +19,20 @@ signal command(action)
 @onready var action_display := $ActionDisplay
 @onready var fov_radius: Area2D = $FOVRadius
 @onready var selection_indicator := $SelectionIndicator
+@onready var avoid_solids := $AvoidSolids
+@onready var ray_front := $AvoidSolids/Right
 
 const AI_SPEED = 40.0
 const PLAYER_SPEED := 60.0
 
 var move_speed := AI_SPEED
-var facing_dir := 1.0
+var facing_dir := 1.0:
+	set(_facing_dir):
+		facing_dir = _facing_dir
+		if facing_dir > 0:
+			sprite.flip_h = false
+		elif facing_dir < 0:
+			sprite.flip_h = true
 var target_direction: int = 1
 var direction: Vector2
 var selecting_order := false
@@ -39,8 +47,7 @@ func _ready() -> void:
 	stats = stats.duplicate()
 	stats.make_a_name()
 	stats.connect("died", _on_died)
-
-
+	
 
 func _input(event: InputEvent):
 	if not playable: return
@@ -85,28 +92,29 @@ func _process_playable() -> void:
 
 
 func _physics_process(delta):
-	$Label.text = state_manager.current_state.name
+#	$Label.text = state_manager.current_state.name
 	if playable:
 		_process_playable()
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
+	else:
+		avoid_solids.look_at(global_position + velocity.normalized() * 100)
+		if ray_front.is_colliding():
+			avoid_solids.scale.x = sign(facing_dir)
+			avoid_obstacles()
+#	# Get the input direction and handle the movement/deceleration.
+#	# As good practice, you should replace UI actions with custom gameplay actions.
 	if direction:
 		velocity = direction * move_speed
 	else:
 		velocity.x = move_toward(velocity.x, 0, move_speed)
 		velocity.y = move_toward(velocity.y, 0, move_speed)
-
+#
 	if not selecting_order or not playable:
 		if direction.x != 0:
 			facing_dir = direction.x
 		move_and_slide()
-	
-	if facing_dir > 0:
-		sprite.flip_h = false
-	elif facing_dir < 0:
-		sprite.flip_h = true
 
 func _on_died() -> void:
+	Globals.casualties += 1
 	EventBus.emit_signal("unit_died", self)
 	if playable:
 		EventBus.emit_signal("player_died")
@@ -126,6 +134,18 @@ func _on_command_area_body_exited(body):
 	
 	if not playable and body.playable:
 		lead = body
+		command_area.queue_free()
+
+
+func avoid_obstacles():
+	var _viable_ray: RayCast2D
+	for ray in avoid_solids.get_children():
+		if not ray.is_colliding():
+			_viable_ray = ray
+			break
+	
+	if _viable_ray:
+		velocity = Vector2.RIGHT.rotated(avoid_solids.rotation + _viable_ray.rotation) * move_speed
 
 
 func do_cheer() -> void:

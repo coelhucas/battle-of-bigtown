@@ -11,6 +11,7 @@ var game_manager: Node
 
 func _ready() -> void:
 	EventBus.connect(EventBus.player_died.get_name(), _on_player_died)
+#	generate_debug_party(75)
 
 func change_scene(_new_scene: PackedScene) -> Node2D:
 	for child in get_children():
@@ -31,3 +32,12 @@ func start_battle(_node: MapNode) -> void:
 	var _battleground: Node2D = change_scene(ReferenceStash.SCENE_BATTLEGROUND)
 	_battleground.spawn(party, _node.location.army)
 	emit_signal("save_last_location", _node)
+
+
+func generate_debug_party(_amount: int, base_strength: float = 1.0) -> void:
+	for i in _amount:
+		var _unit: UnitStats = UnitStats.new()
+		_unit.make_a_name()
+		_unit.damage = 1.5 * clamp(randi_range(base_strength - 3, base_strength + 3), 1, 10)
+		_unit.hp = 10 * clamp(randi_range(base_strength - 3, base_strength + 3), 1, 10)
+		party.append(_unit)

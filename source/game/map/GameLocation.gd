@@ -36,10 +36,11 @@ func generate_population() -> void:
 
 
 func get_for_hire() -> Array[UnitStats]:
-	available_for_hire = population.slice(0, 10)
+	available_for_hire = population.slice(0, 8)
 	return available_for_hire
 
 
 func get_gold_prize() -> int:
 	var _value := int(clamp(base_strength, 1, 10) * population_size * 2)
+	Globals.earned_gold = _value
 	return _value

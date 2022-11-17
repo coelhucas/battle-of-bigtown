@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://p6mqscjj5hxt"]
+[gd_scene load_steps=6 format=3 uid="uid://p6mqscjj5hxt"]
 
+[ext_resource type="Theme" uid="uid://bgrllsi3i5dkj" path="res://assets/theme/default.tres" id="1_n6qd2"]
 [ext_resource type="Script" path="res://source/game/hud/Recruit/UnitInformation/UnitInformation.gd" id="1_yrlii"]
 [ext_resource type="Texture2D" uid="uid://drs7dum3c280v" path="res://assets/selection_indicator.png" id="2_bc8pk"]
+[ext_resource type="Theme" uid="uid://cw0fb2cqqyu1c" path="res://assets/theme/secondary.tres" id="4_det8s"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vuue7"]
 bg_color = Color(1, 1, 1, 1)
@@ -13,6 +15,7 @@ custom_minimum_size = Vector2(120, 0)
 offset_right = 107.0
 offset_bottom = 116.0
 size_flags_horizontal = 3
+theme = ExtResource("1_n6qd2")
 alignment = 1
 script = ExtResource("1_yrlii")
 
@@ -23,68 +26,69 @@ texture = ExtResource("2_bc8pk")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 offset_right = 112.0
-offset_bottom = 116.0
+offset_bottom = 142.0
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 offset_right = 112.0
-offset_bottom = 26.0
+offset_bottom = 31.0
+theme = ExtResource("4_det8s")
 text = "Elador"
 horizontal_alignment = 1
 
 [node name="Attributes" type="VBoxContainer" parent="VBoxContainer"]
-offset_top = 30.0
+offset_top = 35.0
 offset_right = 112.0
-offset_bottom = 86.0
+offset_bottom = 105.0
 
 [node name="Hp" type="HBoxContainer" parent="VBoxContainer/Attributes"]
 offset_right = 112.0
-offset_bottom = 26.0
+offset_bottom = 33.0
 alignment = 1
 
 [node name="Name" type="Label" parent="VBoxContainer/Attributes/Hp"]
-offset_left = 31.0
-offset_right = 58.0
-offset_bottom = 26.0
+offset_left = 25.0
+offset_right = 60.0
+offset_bottom = 33.0
 text = "Hp:"
 horizontal_alignment = 1
 
 [node name="Value" type="Label" parent="VBoxContainer/Attributes/Hp"]
-offset_left = 62.0
-offset_right = 81.0
-offset_bottom = 26.0
+offset_left = 64.0
+offset_right = 86.0
+offset_bottom = 33.0
 text = "12"
 horizontal_alignment = 1
 
 [node name="Attack" type="HBoxContainer" parent="VBoxContainer/Attributes"]
-offset_top = 30.0
+offset_top = 37.0
 offset_right = 112.0
-offset_bottom = 56.0
+offset_bottom = 70.0
 alignment = 1
 
 [node name="Name" type="Label" parent="VBoxContainer/Attributes/Attack"]
-offset_left = 17.0
-offset_right = 71.0
-offset_bottom = 26.0
+offset_left = 2.0
+offset_right = 84.0
+offset_bottom = 33.0
 text = "Attack:"
 horizontal_alignment = 1
 
 [node name="Value" type="Label" parent="VBoxContainer/Attributes/Attack"]
-offset_left = 75.0
-offset_right = 94.0
-offset_bottom = 26.0
+offset_left = 88.0
+offset_right = 110.0
+offset_bottom = 33.0
 text = "13"
 horizontal_alignment = 1
 
 [node name="Price" type="Label" parent="VBoxContainer"]
-offset_top = 90.0
+offset_top = 109.0
 offset_right = 112.0
-offset_bottom = 116.0
+offset_bottom = 142.0
 text = "Hire (-13)"
 horizontal_alignment = 1
 
 [node name="VSeparator" type="VSeparator" parent="."]
 offset_left = 116.0
 offset_right = 120.0
-offset_bottom = 116.0
+offset_bottom = 142.0
 theme_override_styles/separator = SubResource("StyleBoxFlat_vuue7")

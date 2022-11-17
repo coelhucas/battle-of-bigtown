@@ -124,6 +124,8 @@ animation = "attack"
 [node name="FOVRadius" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 34
+monitoring = false
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FOVRadius"]
 position = Vector2(0, -4)
@@ -134,3 +136,34 @@ autoplay = "walk_human"
 libraries = {
 "": SubResource("AnimationLibrary_qpjnb")
 }
+
+[node name="AvoidSolids" type="Node2D" parent="."]
+
+[node name="Top" type="RayCast2D" parent="AvoidSolids"]
+rotation = -1.57079
+enabled = false
+target_position = Vector2(16, 0)
+collision_mask = 5
+
+[node name="TopRight" type="RayCast2D" parent="AvoidSolids"]
+rotation = -0.785397
+enabled = false
+target_position = Vector2(16, 0)
+collision_mask = 5
+
+[node name="Right" type="RayCast2D" parent="AvoidSolids"]
+enabled = false
+target_position = Vector2(16, 0)
+collision_mask = 5
+
+[node name="BottomRight" type="RayCast2D" parent="AvoidSolids"]
+rotation = 0.785397
+enabled = false
+target_position = Vector2(16, 0)
+collision_mask = 5
+
+[node name="Bottom" type="RayCast2D" parent="AvoidSolids"]
+rotation = 1.57079
+enabled = false
+target_position = Vector2(16, 0)
+collision_mask = 5
