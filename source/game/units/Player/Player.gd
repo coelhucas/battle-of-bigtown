@@ -8,8 +8,10 @@ signal command(action)
 		playable = _playable
 		state_manager.current_state.enter()
 		if playable:
+			set_process_input(true)
+			avoid_solids.queue_free()
 			move_speed = PLAYER_SPEED
-@export var attack_range := 12
+@export var attack_range := 8
 @export var stats: UnitStats
 @onready var sprite := $Sprite2D
 @onready var cheering_sounds := $CheerAudios
@@ -22,9 +24,14 @@ signal command(action)
 @onready var avoid_solids := $AvoidSolids
 @onready var ray_front := $AvoidSolids/Right
 
+@onready var sfx_command := $FxCommand
+@onready var sfx_attack := $FxAttack
+@onready var sfx_defend := $FxDefend
+
 const AI_SPEED = 40.0
 const PLAYER_SPEED := 60.0
 
+var units_in_command_range: Array
 var move_speed := AI_SPEED
 var facing_dir := 1.0:
 	set(_facing_dir):
@@ -42,64 +49,78 @@ var target: CollisionObject2D
 var lead: CharacterBody2D
 
 func _ready() -> void:
+	set_process_input(false)
 	state_manager.init(self)
 	animation.connect("animation_finished", state_manager.animation_finished)
 	stats = stats.duplicate()
 	stats.make_a_name()
 	stats.connect("died", _on_died)
 	
+	for ray in avoid_solids.get_children():
+		ray.add_exception(self)
+	
+
+
+func get_units_in_range() -> Array:
+	if selecting_order and command_area.has_overlapping_bodies():
+		units_in_command_range = command_area.get_overlapping_bodies()
+	else:
+		units_in_command_range = []
+	return units_in_command_range
+
 
 func _input(event: InputEvent):
-	if not playable: return
-	
 	if event.is_action_pressed("action_2"):
 		selecting_order = true
+		sfx_command.play()
 		action_display.show()
+		
+		var _units_in_range: Array = get_units_in_range()
+		for _unit in _units_in_range:
+			if not _unit.playable:
+				_unit.show_selection()
 	
 	if event.is_action_released("action_2"):
+		for _unit in units_in_command_range:
+			if is_instance_valid(_unit):
+				_unit.hide_selection()
+
 		if selecting_order and selected_action != Enums.PlayerCommand.NONE:
-			for node in command_area.get_overlapping_bodies():
-				if not node.playable:
+			for node in units_in_command_range:
+				if is_instance_valid(node) and not node.playable:
 					node.state_manager.receive_command(selected_action, facing_dir)
 					node.hide_selection()
+			
+		if selected_action == Enums.PlayerCommand.ATTACK:
+			sfx_attack.play()
+			
+		if selected_action == Enums.PlayerCommand.DEFEND:
+			sfx_defend.play()
 		
 		selecting_order = false
 		selected_action = Enums.PlayerCommand.NONE
 		action_display.hide()
-
-
-func _process_playable() -> void:
-	if Input.is_action_pressed("ui_left") and selecting_order:
+	
+	if event.is_action_pressed("ui_left") and selecting_order:
 		selected_action = Enums.PlayerCommand.DEFEND
 		action_display.set_action(selected_action)
-		
-	if Input.is_action_pressed("ui_right") and selecting_order:
+	
+	if event.is_action_pressed("ui_right") and selecting_order:
 		selected_action = Enums.PlayerCommand.ATTACK
 		action_display.set_action(selected_action)
 	
-	if Input.is_action_just_released("ui_left") and selected_action == Enums.PlayerCommand.DEFEND:
+	if event.is_action_released("ui_left") and selected_action == Enums.PlayerCommand.DEFEND:
 		selected_action = Enums.PlayerCommand.NONE
 		action_display.set_action(selected_action)
 	
-	if Input.is_action_just_released("ui_right") and selected_action == Enums.PlayerCommand.ATTACK:
+	if event.is_action_released("ui_right") and selected_action == Enums.PlayerCommand.ATTACK:
 		selected_action = Enums.PlayerCommand.NONE
 		action_display.set_action(selected_action)
 	
-	if selecting_order and command_area.has_overlapping_bodies():
-		for body in command_area.get_overlapping_bodies():
-			if not body.playable:
-				body.show_selection()
 
 
 func _physics_process(delta):
 #	$Label.text = state_manager.current_state.name
-	if playable:
-		_process_playable()
-	else:
-		avoid_solids.look_at(global_position + velocity.normalized() * 100)
-		if ray_front.is_colliding():
-			avoid_solids.scale.x = sign(facing_dir)
-			avoid_obstacles()
 #	# Get the input direction and handle the movement/deceleration.
 #	# As good practice, you should replace UI actions with custom gameplay actions.
 	if direction:
@@ -108,10 +129,18 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, 0, move_speed)
 		velocity.y = move_toward(velocity.y, 0, move_speed)
 #
+	if not playable:
+		avoid_solids.look_at(global_position + velocity.normalized() * 100)
+		if ray_front.is_colliding():
+			avoid_solids.scale.x = sign(facing_dir)
+			avoid_obstacles()
+
 	if not selecting_order or not playable:
 		if direction.x != 0:
 			facing_dir = direction.x
-		move_and_slide()
+		
+		if direction:
+			move_and_slide()
 
 func _on_died() -> void:
 	Globals.casualties += 1

@@ -32,5 +32,8 @@ enum Creature {
 }
 
 enum Notification {
-	ON_REST
+	ON_REST,
+	DEBUFF_TIRED,
+	DEBUFF_HUNGRY,
+	DEBUFF_TIRED_AND_HUNGRY
 }

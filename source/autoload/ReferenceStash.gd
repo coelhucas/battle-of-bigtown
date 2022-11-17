@@ -7,3 +7,4 @@ extends Node
 @onready var SCENE_DEAD_BODY: PackedScene = load("res://source/game/battle/DeadBody.tscn")
 
 @onready var SOUND_FX_COIN: AudioStream = load("res://assets/sound/fx_coin.wav")
+@onready var SOUND_FX_DEATH: AudioStream = load("res://assets/sound/fx_death.wav")

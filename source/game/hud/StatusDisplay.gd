@@ -17,7 +17,7 @@ func update_initials(actions, gold, population):
 	_on_updated_population(population)
 
 func _on_updated_actions(_actions: int):
-	label_actions.text = "%s/2" % str(_actions)
+	label_actions.text = "%s/%s" % [str(_actions), str(Globals.MAX_ACTIONS)]
 	
 func _on_updated_gold(_gold: int):
 	label_gold.text = str(_gold)

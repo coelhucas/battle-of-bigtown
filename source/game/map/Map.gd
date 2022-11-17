@@ -21,6 +21,9 @@ signal start_battle(enemies_party)
 		if current_node:
 			current_node.remove_reachables()
 			
+			if _node != current_node:
+				current_node.location.just_fighted = false
+			
 		current_node = _node
 		current_node.add_reachables()
 		_reachables = []
@@ -66,13 +69,15 @@ func setup(_world: WorldManager):
 	status_display.update_initials(_world.game_manager.used_actions, Globals.gold, Globals.population)
 
 
-func set_location(_loc: GameLocation):
+func set_location(_loc: GameLocation, _reset_current_location: bool = false):
 	if current_node:
 		current_node.unfocus()
 	
 	for loc in nodes_container.get_children():
 		if loc.location.name == _loc.name:
 			current_node = loc
+			if _reset_current_location:
+				current_node.reset_population()
 			break
 	
 	location_menu.connect(location_menu.selected_action.get_name(), _on_selected_action)
@@ -133,6 +138,9 @@ func _input(event: InputEvent):
 func _on_selected_action(_action: Enums.Action):
 	match _action:
 		Enums.Action.RAID:
+			if Globals.used_actions >= Globals.MAX_ACTIONS:
+				notification.show_notification(Enums.Notification.DEBUFF_TIRED)
+				await notification.acknowledged
 			emit_signal(start_battle.get_name(), current_node)
 		Enums.Action.RECRUIT:
 			recruiting_menu.origin = current_node

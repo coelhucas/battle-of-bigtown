@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://dhykqpco4vjxi"]
+[gd_scene load_steps=5 format=3 uid="uid://dhykqpco4vjxi"]
 
 [ext_resource type="Script" path="res://source/game/hud/Recruit/ChooseUnit.gd" id="1_q5ywj"]
 [ext_resource type="Texture2D" uid="uid://jyn5h0jii3rx" path="res://assets/nine-patch.png" id="2_wlu26"]
+[ext_resource type="AudioStream" uid="uid://cdb0lnqpl5c8o" path="res://assets/sound/fx_buy.wav" id="3_712uy"]
+[ext_resource type="Script" path="res://source/custom_nodes/RandomPitchAudioStreamPlayer.gd" id="4_gke0m"]
 
 [node name="ChooseUnit" type="CenterContainer"]
 custom_minimum_size = Vector2(1280, 720)
@@ -10,13 +12,11 @@ script = ExtResource("1_q5ywj")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 custom_minimum_size = Vector2(1280, 720)
-layout_mode = 2
 offset_right = 1280.0
 offset_bottom = 720.0
 color = Color(0, 0, 0, 0.152941)
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 2
 offset_left = 632.0
 offset_top = 352.0
 offset_right = 648.0
@@ -24,7 +24,6 @@ offset_bottom = 368.0
 
 [node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer"]
 texture_filter = 1
-layout_mode = 2
 offset_right = 16.0
 offset_bottom = 16.0
 texture = ExtResource("2_wlu26")
@@ -34,7 +33,6 @@ patch_margin_right = 8
 patch_margin_bottom = 8
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
-layout_mode = 2
 offset_right = 16.0
 offset_bottom = 16.0
 theme_override_constants/margin_left = 8
@@ -43,7 +41,6 @@ theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
 [node name="Container" type="HBoxContainer" parent="MarginContainer/MarginContainer"]
-layout_mode = 2
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 8.0
@@ -52,9 +49,12 @@ theme_override_constants/separation = 16
 
 [node name="Label" type="Label" parent="."]
 visible = false
-layout_mode = 2
 offset_left = 492.0
 offset_top = 347.0
 offset_right = 788.0
 offset_bottom = 373.0
 text = "There are no units available to recruit."
+
+[node name="SfxConfirm" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_712uy")
+script = ExtResource("4_gke0m")

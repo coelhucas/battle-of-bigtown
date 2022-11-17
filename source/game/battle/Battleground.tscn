@@ -1,7 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://t0irqkfhohdr"]
+[gd_scene load_steps=12 format=3 uid="uid://t0irqkfhohdr"]
 
 [ext_resource type="PackedScene" uid="uid://dtmfgwb420ui0" path="res://source/game/core/Core.tscn" id="1_i2a5y"]
 [ext_resource type="Script" path="res://source/game/battle/Battleground.gd" id="1_pkvcw"]
+[ext_resource type="Texture2D" uid="uid://bxc8nyy6gmlhd" path="res://assets/props/houses.png" id="3_1y1ri"]
+[ext_resource type="Texture2D" uid="uid://dwj44m7dil84x" path="res://assets/props/campfire.png" id="4_0vo35"]
+[ext_resource type="Texture2D" uid="uid://dblathqqf2336" path="res://assets/props/rocksMountain.png" id="5_xp77p"]
+[ext_resource type="Texture2D" uid="uid://5hkhbwypjfjm" path="res://assets/props/rocksTall.png" id="6_dmv3o"]
+[ext_resource type="Texture2D" uid="uid://7nwcmulb25nf" path="res://assets/props/treePinesSmall.png" id="7_taaen"]
+[ext_resource type="Texture2D" uid="uid://8qt1enwv5jab" path="res://assets/props/house.png" id="8_gubk6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_saajs"]
 size = Vector2(140, 70)
@@ -59,3 +65,48 @@ shape = SubResource("RectangleShape2D_3iwvt")
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="MapBoundaries"]
 position = Vector2(0, 245)
 shape = SubResource("RectangleShape2D_22ctk")
+
+[node name="Sprites" type="Node2D" parent="."]
+
+[node name="Houses" type="Sprite2D" parent="Sprites"]
+texture_filter = 1
+position = Vector2(130, 228)
+texture = ExtResource("3_1y1ri")
+
+[node name="Campfire" type="Sprite2D" parent="Sprites"]
+texture_filter = 1
+position = Vector2(48, 186)
+texture = ExtResource("4_0vo35")
+
+[node name="RocksMountain" type="Sprite2D" parent="Sprites"]
+texture_filter = 1
+position = Vector2(369, 400)
+texture = ExtResource("5_xp77p")
+
+[node name="RocksMountain2" type="Sprite2D" parent="Sprites"]
+texture_filter = 1
+position = Vector2(-33, 467)
+texture = ExtResource("5_xp77p")
+
+[node name="RocksTall" type="Sprite2D" parent="Sprites"]
+texture_filter = 1
+position = Vector2(313, 183)
+texture = ExtResource("6_dmv3o")
+
+[node name="TreePinesSmall" type="Sprite2D" parent="Sprites"]
+texture_filter = 1
+position = Vector2(158, 435)
+texture = ExtResource("7_taaen")
+
+[node name="TreePinesSmall2" type="Sprite2D" parent="Sprites"]
+texture_filter = 1
+position = Vector2(-69, 210)
+texture = ExtResource("7_taaen")
+
+[node name="House" type="Sprite2D" parent="."]
+position = Vector2(78, 160)
+texture = ExtResource("8_gubk6")
+
+[node name="House2" type="Sprite2D" parent="."]
+position = Vector2(7, 177)
+texture = ExtResource("8_gubk6")

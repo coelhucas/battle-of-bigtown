@@ -5,7 +5,10 @@ signal selected_action(action)
 @onready var available_actions_container := $CenterContainer/Information/AvailableActions
 @onready var label_name := $CenterContainer/Information/PlaceName
 @onready var label_description := $CenterContainer/Information/PlaceDescription
+
 @onready var btn_rest: ActionButton = $CenterContainer/Information/AvailableActions/Rest
+@onready var btn_raid: ActionButton = $CenterContainer/Information/AvailableActions/Raid
+@onready var btn_recruit: ActionButton = $CenterContainer/Information/AvailableActions/Recruit
 
 var _focused_option: ActionButton
 var _used_actions: int = 0
@@ -41,4 +44,6 @@ func display(_location: GameLocation):
 	
 	for _button in available_actions_container.get_children():
 		_button.visible = (_button as ActionButton).action in _location.available_actions
-		btn_rest.disabled = _location.hostile and _location.army.size()
+		btn_rest.disabled = _location.hostile and not _location.just_fighted
+		btn_recruit.disabled = _location.just_fighted
+		btn_raid.disabled = _location.just_fighted

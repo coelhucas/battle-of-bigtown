@@ -2,6 +2,7 @@ extends Node
 
 @onready var test := preload("res://Playground.tscn")
 @onready var map := preload("res://source/game/map/Map.tscn")
+@onready var sfx_denied := $Sfx/Denied
 
 @onready var world := $World
 
@@ -38,7 +39,6 @@ func _ready() -> void:
 	)
 
 func _on_battle_finished(_winner: Enums.Team) -> void:
-	print("Winner team was %s" % Enums.Team.keys()[_winner])
 	EventBus.emit_signal("battle_finished", _winner)
 
 	
@@ -49,9 +49,9 @@ func _on_battle_finished(_winner: Enums.Team) -> void:
 	else:
 		result_screen.open(_winner)
 
-func _on_left_battle():
+func _on_left_battle(_winner: Enums.Team):
 	var _map_scene: Node2D = world.change_scene(map)
-	_map_scene.set_location(last_location)
+	_map_scene.set_location(last_location, _winner == Enums.Team.PLAYER)
 	result_screen.close()
 	
 
@@ -65,7 +65,7 @@ func _on_attempt_purchase(_unit: UnitStats):
 		Globals.population = world.party.size()
 		EventBus.emit_signal("purchased", _unit)
 	else:
-		push_error("You are poor")
+		sfx_denied.play()
 
 func _on_rest():
 	# TODO: remove food

@@ -59,3 +59,9 @@ func _on_unit_died(_scene: CharacterBody2D):
 	var _body: Node2D = ReferenceStash.SCENE_DEAD_BODY.instantiate()
 	graveyard.add_child(_body)
 	_body.global_position = _scene.global_position
+	
+	var _sfx: AudioStreamFree = AudioStreamFree.new()
+	_sfx.stream = ReferenceStash.SOUND_FX_DEATH
+	_sfx.volume_db = -50.0
+	add_child(_sfx)
+	_sfx.play()

@@ -13,6 +13,7 @@ class_name GameLocation
 # 70%
 const POPULATION_TO_ARMY_RATIO := 0.5
 
+var just_fighted: bool = false
 var available_for_hire: Array[UnitStats]
 var base_price := 5
 

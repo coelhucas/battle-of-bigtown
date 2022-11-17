@@ -14,6 +14,7 @@ const RESULT_STRING := "--- You %s the battle ---"
 @onready var sfx_victory := $Sfx/Victory
 @onready var sfx_defeat := $Sfx/Defeat
 
+var last_winner: Enums.Team
 var displayed_coins := 0
 var total_coins := 1
 
@@ -22,6 +23,7 @@ func _ready() -> void:
 	set_process_input(false)
 
 func open(_winner: Enums.Team, _gold: int = 0) -> void:
+	last_winner = _winner
 	displayed_coins = 0
 	total_coins = _gold
 	if container.modulate.a > 0.0: return
@@ -56,7 +58,7 @@ func close() -> void:
 
 func _input(event):
 	if event.is_action_pressed("action_1") and add_coin_timer.is_stopped():
-		emit_signal("leave_battle")
+		emit_signal("leave_battle", last_winner)
 	elif event.is_action_pressed("action_1") and not add_coin_timer.is_stopped():
 		label_gold.text = str(total_coins)
 		add_coin_timer.stop()

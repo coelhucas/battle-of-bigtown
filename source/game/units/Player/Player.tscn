@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dnrjt1f7bs02w"]
+[gd_scene load_steps=33 format=3 uid="uid://dnrjt1f7bs02w"]
 
 [ext_resource type="Script" path="res://source/game/units/Player/Player.gd" id="1_0pmxq"]
 [ext_resource type="Script" path="res://source/game/units/Player/StateManager.gd" id="2_b4uvq"]
@@ -18,6 +18,9 @@
 [ext_resource type="AudioStream" uid="uid://cslpc2qg2lh18" path="res://assets/sound/fx_cheer_3.ogg" id="16_bh4g4"]
 [ext_resource type="AudioStream" uid="uid://d0dw402fcinm" path="res://assets/sound/fx_cheer_4.ogg" id="17_iebhv"]
 [ext_resource type="AudioStream" uid="uid://bnijco8s1k2ev" path="res://assets/sound/fx_pop_walk.wav" id="18_vbekh"]
+[ext_resource type="AudioStream" uid="uid://d4j7qp31x7f6m" path="res://assets/sound/fx_command.ogg" id="19_ulgc7"]
+[ext_resource type="AudioStream" uid="uid://hxa1j46mdlsk" path="res://assets/sound/fx_attack.ogg" id="20_fqtkg"]
+[ext_resource type="AudioStream" uid="uid://qvmky2rn0psw" path="res://assets/sound/fx_defend.ogg" id="21_163bk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s37hy"]
 radius = 2.0
@@ -171,6 +174,7 @@ script = ExtResource("1_0pmxq")
 stats = ExtResource("2_i5lbw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, -2)
 shape = SubResource("CircleShape2D_s37hy")
 
@@ -217,6 +221,7 @@ monitoring = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FOVRadius"]
+visible = false
 position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_23fid")
 
@@ -245,6 +250,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CommandArea"]
+visible = false
 position = Vector2(0, -8)
 shape = SubResource("CircleShape2D_nyv6q")
 
@@ -264,18 +270,22 @@ libraries = {
 
 [node name="RandomPitchAudioStreamPlayer" type="AudioStreamPlayer" parent="CheerAudios"]
 stream = ExtResource("13_73hat")
+volume_db = -10.0
 script = ExtResource("14_uf5yi")
 
 [node name="RandomPitchAudioStreamPlayer2" type="AudioStreamPlayer" parent="CheerAudios"]
 stream = ExtResource("15_3dw7q")
+volume_db = -10.0
 script = ExtResource("14_uf5yi")
 
 [node name="RandomPitchAudioStreamPlayer3" type="AudioStreamPlayer" parent="CheerAudios"]
 stream = ExtResource("16_bh4g4")
+volume_db = -10.0
 script = ExtResource("14_uf5yi")
 
 [node name="RandomPitchAudioStreamPlayer4" type="AudioStreamPlayer" parent="CheerAudios"]
 stream = ExtResource("17_iebhv")
+volume_db = -10.0
 script = ExtResource("14_uf5yi")
 
 [node name="AvoidSolids" type="Node2D" parent="."]
@@ -311,6 +321,21 @@ collision_mask = 3
 
 [node name="FxStep" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("18_vbekh")
+volume_db = -20.0
+script = ExtResource("14_uf5yi")
+
+[node name="FxCommand" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("19_ulgc7")
+volume_db = -20.0
+script = ExtResource("14_uf5yi")
+
+[node name="FxAttack" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("20_fqtkg")
+volume_db = -20.0
+script = ExtResource("14_uf5yi")
+
+[node name="FxDefend" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("21_163bk")
 volume_db = -20.0
 script = ExtResource("14_uf5yi")
 

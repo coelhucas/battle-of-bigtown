@@ -8,8 +8,10 @@ const SPEED := 40.0
 @onready var animation := $AnimationPlayer
 @onready var avoid_solids := $AvoidSolids
 @onready var ray_front := $AvoidSolids/Right
+@onready var sfx_death := $Sfx/Death
 @export var stats: UnitStats
 @export var creature: Enums.Creature
+
 
 var target: CollisionObject2D
 var direction: Vector2
@@ -17,9 +19,6 @@ var attack_range := 8
 var hp := 5:
 	set(_hp):
 		hp = _hp
-		
-		if hp <= 0:
-			queue_free()
 
 func _ready() -> void:
 	state_manager.init(self)
@@ -51,11 +50,11 @@ func _physics_process(delta):
 			if not ray.is_colliding():
 				_viable_ray = ray
 				break
-		
+
 		if _viable_ray:
 			velocity = Vector2.RIGHT.rotated(avoid_solids.rotation + _viable_ray.rotation) * SPEED
 	
-	if velocity:
+	if direction:
 		move_and_slide()
 
 func _on_died() -> void:

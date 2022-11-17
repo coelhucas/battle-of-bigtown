@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://1lctbbkfaddi"]
+[gd_scene load_steps=9 format=3 uid="uid://1lctbbkfaddi"]
 
 [ext_resource type="Script" path="res://source/game/manager/Main.gd" id="1_hqigh"]
 [ext_resource type="Script" path="res://source/game/manager/World.gd" id="2_a75s7"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://4q0ulsbcrisf" path="res://source/game/hud/ResultScreen/ResultScreen.tscn" id="4_4tkmf"]
 [ext_resource type="Resource" uid="uid://0s5dlwaiowao" path="res://data/locations/smalltown.tres" id="4_5k5i4"]
 [ext_resource type="Shader" path="res://assets/shaders/crt.gdshader" id="5_jw3k8"]
+[ext_resource type="AudioStream" uid="uid://3ha01e4ioe6x" path="res://assets/sound/fx_denied.ogg" id="7_4j6hh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_74a70"]
 shader = ExtResource("5_jw3k8")
@@ -49,3 +50,8 @@ custom_minimum_size = Vector2(1280, 720)
 offset_right = 1280.0
 offset_bottom = 720.0
 mouse_filter = 2
+
+[node name="Sfx" type="Node" parent="."]
+
+[node name="Denied" type="AudioStreamPlayer" parent="Sfx"]
+stream = ExtResource("7_4j6hh")

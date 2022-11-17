@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://jjywkee5j1h3"]
+[gd_scene load_steps=17 format=3 uid="uid://jjywkee5j1h3"]
 
 [ext_resource type="Script" path="res://source/game/units/Enemy/Enemy.gd" id="1_i36l4"]
 [ext_resource type="Resource" uid="uid://d0c8yvlikoohk" path="res://data/stats/dummy.tres" id="2_284mq"]
@@ -6,9 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://ilkmew2i6vnb" path="res://assets/human.png" id="3_6e66e"]
 [ext_resource type="Script" path="res://source/game/units/Enemy/states/LookForTarget.gd" id="3_cqf4t"]
 [ext_resource type="Script" path="res://source/game/units/Enemy/states/Attack.gd" id="5_ugi6l"]
+[ext_resource type="AudioStream" uid="uid://d3ev0rgrexaxg" path="res://assets/sound/fx_death.wav" id="7_xsirh"]
+[ext_resource type="Script" path="res://source/custom_nodes/RandomPitchAudioStreamPlayer.gd" id="8_ppkd4"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cisrk"]
-size = Vector2(4, 3)
+[sub_resource type="CircleShape2D" id="CircleShape2D_n7ptt"]
+radius = 1.11803
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q42jl"]
 size = Vector2(128, 128)
@@ -105,7 +107,7 @@ hframes = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -1.5)
-shape = SubResource("RectangleShape2D_cisrk")
+shape = SubResource("CircleShape2D_n7ptt")
 
 [node name="StateManager" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_tyoj4")
@@ -128,6 +130,7 @@ monitoring = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FOVRadius"]
+visible = false
 position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_q42jl")
 
@@ -141,29 +144,31 @@ libraries = {
 
 [node name="Top" type="RayCast2D" parent="AvoidSolids"]
 rotation = -1.57079
-enabled = false
 target_position = Vector2(16, 0)
 collision_mask = 5
 
 [node name="TopRight" type="RayCast2D" parent="AvoidSolids"]
 rotation = -0.785397
-enabled = false
 target_position = Vector2(16, 0)
 collision_mask = 5
 
 [node name="Right" type="RayCast2D" parent="AvoidSolids"]
-enabled = false
 target_position = Vector2(16, 0)
 collision_mask = 5
 
 [node name="BottomRight" type="RayCast2D" parent="AvoidSolids"]
 rotation = 0.785397
-enabled = false
 target_position = Vector2(16, 0)
 collision_mask = 5
 
 [node name="Bottom" type="RayCast2D" parent="AvoidSolids"]
 rotation = 1.57079
-enabled = false
 target_position = Vector2(16, 0)
 collision_mask = 5
+
+[node name="Sfx" type="Node" parent="."]
+
+[node name="Death" type="AudioStreamPlayer" parent="Sfx"]
+stream = ExtResource("7_xsirh")
+volume_db = -30.0
+script = ExtResource("8_ppkd4")

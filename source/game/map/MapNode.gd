@@ -9,11 +9,14 @@ signal selected(node)
 @onready var sprite := $Sprite2D
 @onready var current_indicator := $CurrentIndicator
 
+var is_locked: bool = false
+
 var is_current := false:
 	set(_is_current):
 		is_current = _is_current
 		sprite.material.set_shader_parameter("is_enabled", not reachable and not is_current)
 		current_indicator.visible = is_current
+		
 var locations: Array[MapNode]
 var reachable := false:
 	set(_reachable):
@@ -57,6 +60,9 @@ func add_reachables() -> void:
 func remove_unit(_unit: UnitStats) -> void:
 	location.population.erase(_unit)
 	location.available_for_hire.erase(_unit)
+	
+func reset_population() -> void:
+	location.just_fighted = true
 
 func unfocus():
 	if is_instance_valid(_tween) and _tween.is_running():

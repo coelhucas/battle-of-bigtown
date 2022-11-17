@@ -6,10 +6,13 @@ var current_state: BaseEnemyState
 
 func _ready() -> void:
 	current_state = initial_state
+
 	
 func init(_player) -> void:
 	for state in get_children():
 		state.player = _player
+	
+	change_state(initial_state)
 
 func change_state(_new_state: BaseEnemyState) -> void:
 	current_state.exit()

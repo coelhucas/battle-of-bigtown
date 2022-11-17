@@ -8,16 +8,32 @@
 - [x] Limit how many hires you can see for place
 - [x] Do not show again result screen if it is already visible
 - [X] Make map (with full cycle)
-    - [ ] Create last 3 locations in game
 
 - [ ] Add food
     - [ ] Hunger debuff
-- [ ] Tiredness debuff
 - [x] Make characters change target after some distance
 - [x] Show kills and losses on result screen
 
+- [x] Enable resting after battling a hostile place
+    - [x] Wait player leave node before creating new population
+
+- [ ] Tiredness debuff
+    [x] Notification
+    [ ] Actual debuff on units
+
 - [ ] Check for collisions before spawning
-- [ ] Just create more population (?) when player left the node
+- [ ] Improve interfaces
+- [ ] Create last 3 locations in game
+- [ ] Add an ending (win a battle against smalltown?)
+- [ ] Make places get stronger after each "turn"
+- [ ] Fix horizontal input for giving orders
+- [ ] Punish player on defeat
 
 ----
+
+otla
+racata
+raucer
+
+herb:
 go to wikipedia (or dictionary) and search three to five random pages only, choose one and make a game out of it

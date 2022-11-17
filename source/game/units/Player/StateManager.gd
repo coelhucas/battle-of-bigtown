@@ -16,6 +16,8 @@ func init(_player) -> void:
 	player = _player
 	for state in get_children():
 		state.player = _player
+	
+	change_state(initial_state)
 
 
 func receive_command(_command: Enums.PlayerCommand, _dir: int) -> void:
@@ -30,7 +32,8 @@ func receive_command(_command: Enums.PlayerCommand, _dir: int) -> void:
 
 
 func change_state(_new_state: BasePlayerState) -> void:
-	current_state.exit()
+	if current_state:
+		current_state.exit()
 	current_state = _new_state
 	current_state.enter()
 

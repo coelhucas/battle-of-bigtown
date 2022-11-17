@@ -2,6 +2,7 @@ extends CenterContainer
 
 @onready var container := $MarginContainer/MarginContainer/Container
 @onready var label_availability := $Label
+@onready var sfx_confirm := $SfxConfirm
 
 var origin: MapNode
 
@@ -66,5 +67,6 @@ func show_options(_options: Array[UnitStats]) -> void:
 func _on_purchased(_unit: UnitStats) -> void:
 	origin.remove_unit(_unit)
 	_selected_option = wrapi(_selected_option, 0, origin.location.population.size())
+	sfx_confirm.play()
 	# Update options
 	show_options(origin.location.available_for_hire)
