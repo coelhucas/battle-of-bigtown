@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://drsr4nlxk1i55"]
+
+[ext_resource type="Script" path="res://source/game/map/GameLocation.gd" id="1_8i2ew"]
+
+[resource]
+script = ExtResource("1_8i2ew")
+name = "Death Woods"
+description = "A place known by its perils and hostility from an unknown people. Doesn't seem safe to stay."
+available_actions = [1]
+army = []
+hostile = true
+base_strength = null
+population_size = null

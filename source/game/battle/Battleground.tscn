@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3 uid="uid://t0irqkfhohdr"]
+
+[ext_resource type="PackedScene" uid="uid://dtmfgwb420ui0" path="res://source/game/core/Core.tscn" id="1_i2a5y"]
+[ext_resource type="Script" path="res://source/game/battle/Battleground.gd" id="1_pkvcw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_saajs"]
+size = Vector2(218, 80)
+
+[node name="Battleground" type="Node2D"]
+script = ExtResource("1_pkvcw")
+
+[node name="PlayerCore" parent="." instance=ExtResource("1_i2a5y")]
+position = Vector2(-110, 334)
+
+[node name="EnemyCore" parent="." instance=ExtResource("1_i2a5y")]
+position = Vector2(421, 334)
+owned_by_enemy = true
+
+[node name="PlayerSpawnArea" type="Area2D" parent="."]
+position = Vector2(37, 333)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerSpawnArea"]
+shape = SubResource("RectangleShape2D_saajs")
+
+[node name="EnemySpawnArea" type="Area2D" parent="."]
+position = Vector2(270, 333)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemySpawnArea"]
+shape = SubResource("RectangleShape2D_saajs")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(162, 326)
+current = true
+zoom = Vector2(2, 2)
+
+[node name="Graveyard" type="Node2D" parent="."]

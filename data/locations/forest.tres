@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://dl77hia56sm5m"]
+
+[ext_resource type="Script" path="res://source/game/map/GameLocation.gd" id="1_8i2ew"]
+
+[resource]
+script = ExtResource("1_8i2ew")
+name = "Forest"
+description = "Sounds quiet, you don't see anyone nearby."
+available_actions = [1]
+army = []
+population = null
+hostile = false
+base_strength = null
+population_size = null

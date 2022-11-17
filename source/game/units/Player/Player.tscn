@@ -1,0 +1,277 @@
+[gd_scene load_steps=29 format=3 uid="uid://dnrjt1f7bs02w"]
+
+[ext_resource type="Script" path="res://source/game/units/Player/Player.gd" id="1_0pmxq"]
+[ext_resource type="Script" path="res://source/game/units/Player/StateManager.gd" id="2_b4uvq"]
+[ext_resource type="Resource" uid="uid://d0c8yvlikoohk" path="res://data/stats/dummy.tres" id="2_i5lbw"]
+[ext_resource type="Script" path="res://source/game/units/Player/states/Idle.gd" id="3_2htgb"]
+[ext_resource type="Script" path="res://source/game/units/Player/states/Walk.gd" id="4_7boa6"]
+[ext_resource type="Script" path="res://source/game/units/Player/states/LookForTarget.gd" id="5_71xty"]
+[ext_resource type="Script" path="res://source/game/units/Player/states/Attack.gd" id="6_pow8d"]
+[ext_resource type="Script" path="res://source/game/units/Player/states/Retreat.gd" id="7_oqpe0"]
+[ext_resource type="Script" path="res://source/game/units/Player/states/Victory.gd" id="9_ss07v"]
+[ext_resource type="PackedScene" uid="uid://cja5e0rev0h5n" path="res://source/game/hud/ActionDisplay/ActionDisplay.tscn" id="9_vjts4"]
+[ext_resource type="Texture2D" uid="uid://drs7dum3c280v" path="res://assets/selection_indicator.png" id="10_e2eyq"]
+[ext_resource type="Texture2D" uid="uid://ilkmew2i6vnb" path="res://assets/human.png" id="11_igbnt"]
+[ext_resource type="AudioStream" uid="uid://cssdv5oogas6p" path="res://assets/sound/fx_cheer_1.ogg" id="13_73hat"]
+[ext_resource type="Script" path="res://source/custom_nodes/RandomPitchAudioStreamPlayer.gd" id="14_uf5yi"]
+[ext_resource type="AudioStream" uid="uid://c0htaj0tukf04" path="res://assets/sound/fx_cheer_2.ogg" id="15_3dw7q"]
+[ext_resource type="AudioStream" uid="uid://cslpc2qg2lh18" path="res://assets/sound/fx_cheer_3.ogg" id="16_bh4g4"]
+[ext_resource type="AudioStream" uid="uid://d0dw402fcinm" path="res://assets/sound/fx_cheer_4.ogg" id="17_iebhv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j7rhl"]
+size = Vector2(4, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_23fid"]
+size = Vector2(128, 128)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nyv6q"]
+radius = 81.0
+
+[sub_resource type="Animation" id="Animation_epsc0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame_coords")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(8, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_u3qaw"]
+resource_name = "attack"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_kdnja"]
+resource_name = "cheer"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(8, 0), Vector2i(9, 0), Vector2i(10, 0), Vector2i(9, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_15m7l"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_pxk75"]
+resource_name = "idle_playable"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+
+[sub_resource type="Animation" id="Animation_pen7y"]
+resource_name = "walk"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_3vohj"]
+resource_name = "walk_playable"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [5, 6, 5, 7]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ctjjc"]
+_data = {
+"RESET": SubResource("Animation_epsc0"),
+"attack": SubResource("Animation_u3qaw"),
+"cheer": SubResource("Animation_kdnja"),
+"idle": SubResource("Animation_15m7l"),
+"idle_playable": SubResource("Animation_pxk75"),
+"walk": SubResource("Animation_pen7y"),
+"walk_playable": SubResource("Animation_3vohj")
+}
+
+[node name="Unit" type="CharacterBody2D" groups=["player_unit"]]
+collision_layer = 2
+collision_mask = 7
+script = ExtResource("1_0pmxq")
+stats = ExtResource("2_i5lbw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_j7rhl")
+
+[node name="StateManager" type="Node" parent="." node_paths=PackedStringArray("initial_state", "look_for_target_state", "retreat_state", "cheer_state")]
+script = ExtResource("2_b4uvq")
+initial_state = NodePath("Idle")
+look_for_target_state = NodePath("LookForTarget")
+retreat_state = NodePath("Retreat")
+cheer_state = NodePath("Victory")
+
+[node name="Idle" type="Node" parent="StateManager" node_paths=PackedStringArray("walk_state")]
+script = ExtResource("3_2htgb")
+walk_state = NodePath("../Walk")
+animation = "idle"
+
+[node name="Walk" type="Node" parent="StateManager" node_paths=PackedStringArray("idle_state")]
+script = ExtResource("4_7boa6")
+idle_state = NodePath("../Idle")
+animation = "walk"
+
+[node name="LookForTarget" type="Node" parent="StateManager" node_paths=PackedStringArray("attack_state")]
+script = ExtResource("5_71xty")
+attack_state = NodePath("../Attack")
+animation = "walk"
+
+[node name="Attack" type="Node" parent="StateManager" node_paths=PackedStringArray("look_for_target_state")]
+script = ExtResource("6_pow8d")
+look_for_target_state = NodePath("../LookForTarget")
+animation = "attack"
+
+[node name="Retreat" type="Node" parent="StateManager" node_paths=PackedStringArray("look_for_target_state")]
+script = ExtResource("7_oqpe0")
+look_for_target_state = NodePath("../LookForTarget")
+animation = "walk"
+
+[node name="Victory" type="Node" parent="StateManager"]
+script = ExtResource("9_ss07v")
+animation = "cheer"
+
+[node name="FOVRadius" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 68
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FOVRadius"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_23fid")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = -20.0
+offset_top = 5.0
+offset_right = 20.0
+offset_bottom = 28.0
+
+[node name="ActionDisplay" parent="." instance=ExtResource("9_vjts4")]
+visible = false
+offset_left = -58.0
+offset_top = -72.0
+offset_right = -58.0
+offset_bottom = -72.0
+
+[node name="SelectionIndicator" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+position = Vector2(0, -21)
+texture = ExtResource("10_e2eyq")
+
+[node name="CommandArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CommandArea"]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_nyv6q")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -3)
+texture = ExtResource("11_igbnt")
+hframes = 12
+frame = 8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ctjjc")
+}
+
+[node name="CheerAudios" type="Node" parent="."]
+
+[node name="RandomPitchAudioStreamPlayer" type="AudioStreamPlayer" parent="CheerAudios"]
+stream = ExtResource("13_73hat")
+script = ExtResource("14_uf5yi")
+
+[node name="RandomPitchAudioStreamPlayer2" type="AudioStreamPlayer" parent="CheerAudios"]
+stream = ExtResource("15_3dw7q")
+script = ExtResource("14_uf5yi")
+
+[node name="RandomPitchAudioStreamPlayer3" type="AudioStreamPlayer" parent="CheerAudios"]
+stream = ExtResource("16_bh4g4")
+script = ExtResource("14_uf5yi")
+
+[node name="RandomPitchAudioStreamPlayer4" type="AudioStreamPlayer" parent="CheerAudios"]
+stream = ExtResource("17_iebhv")
+script = ExtResource("14_uf5yi")
+
+[connection signal="body_exited" from="CommandArea" to="." method="_on_command_area_body_exited"]

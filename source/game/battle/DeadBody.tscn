@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bq4dbqhylplg1"]
+
+[ext_resource type="Texture2D" uid="uid://ilkmew2i6vnb" path="res://assets/human.png" id="1_272je"]
+
+[node name="DeadBody" type="Sprite2D"]
+modulate = Color(0.380392, 0.380392, 0.380392, 0.517647)
+texture_filter = 1
+texture = ExtResource("1_272je")
+hframes = 12
+frame = 11

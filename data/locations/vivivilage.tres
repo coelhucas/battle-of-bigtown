@@ -1,0 +1,29 @@
+[gd_resource type="Resource" load_steps=5 format=3 uid="uid://5ilm7vl34ki3"]
+
+[ext_resource type="Script" path="res://source/game/units/UnitStats.gd" id="1_04vi6"]
+[ext_resource type="Script" path="res://source/game/map/GameLocation.gd" id="1_8i2ew"]
+
+[sub_resource type="Resource" id="Resource_l3juv"]
+script = ExtResource("1_04vi6")
+hp = 50.0
+damage = 5.0
+price = 20.0
+name = null
+
+[sub_resource type="Resource" id="Resource_0pqwf"]
+script = ExtResource("1_04vi6")
+hp = 10.0
+damage = 1.5
+price = 5.0
+name = "Walt Disney"
+
+[resource]
+script = ExtResource("1_8i2ew")
+name = "Vivivilage"
+description = "A ve-very cool Vi-vilage"
+available_actions = [0, 3, 1]
+army = [SubResource("Resource_l3juv"), SubResource("Resource_0pqwf")]
+population = null
+hostile = false
+base_strength = 1.0
+population_size = 10.0

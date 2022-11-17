@@ -1,0 +1,363 @@
+[gd_scene load_steps=28 format=3 uid="uid://dv81fkrwp28q7"]
+
+[ext_resource type="PackedScene" uid="uid://bjt5e50raeltk" path="res://source/game/map/MapNode.tscn" id="1_hiocq"]
+[ext_resource type="Script" path="res://source/game/map/Map.gd" id="1_nqorq"]
+[ext_resource type="Resource" uid="uid://0s5dlwaiowao" path="res://data/locations/smalltown.tres" id="3_4rjre"]
+[ext_resource type="Script" path="res://source/game/map/LocationMenu.gd" id="3_q0o3h"]
+[ext_resource type="Texture2D" uid="uid://cxq27p8s4cwwr" path="res://assets/props/castle.png" id="4_g7nj8"]
+[ext_resource type="Resource" uid="uid://5ilm7vl34ki3" path="res://data/locations/vivivilage.tres" id="4_x31w4"]
+[ext_resource type="Resource" uid="uid://dl77hia56sm5m" path="res://data/locations/forest.tres" id="5_vokf5"]
+[ext_resource type="Texture2D" uid="uid://bxc8nyy6gmlhd" path="res://assets/props/houses.png" id="6_6b4aw"]
+[ext_resource type="Script" path="res://source/game/map/ActionButton/ActionButton.gd" id="6_aspfx"]
+[ext_resource type="Texture2D" uid="uid://hiotarvrp8o" path="res://assets/props/tipi.png" id="8_5n7cs"]
+[ext_resource type="Script" path="res://source/game/hud/Notification/Notification.gd" id="8_lcl62"]
+[ext_resource type="Resource" uid="uid://boo5s4sokpx1i" path="res://data/locations/bandit_camp.tres" id="9_bbo7h"]
+[ext_resource type="PackedScene" uid="uid://dhykqpco4vjxi" path="res://source/game/hud/Recruit/ChooseUnit.tscn" id="9_gywco"]
+[ext_resource type="Script" path="res://source/game/hud/StatusDisplay.gd" id="10_1b703"]
+[ext_resource type="Texture2D" uid="uid://7nwcmulb25nf" path="res://assets/props/treePinesSmall.png" id="10_gp0b6"]
+[ext_resource type="Resource" uid="uid://m5aeqd4vwhww" path="res://data/locations/camp.tres" id="11_4xaoi"]
+[ext_resource type="Texture2D" uid="uid://dwj44m7dil84x" path="res://assets/props/campfire.png" id="11_do8x2"]
+[ext_resource type="Script" path="res://source/game/map/Interface.gd" id="11_yw83g"]
+[ext_resource type="Resource" uid="uid://drsr4nlxk1i55" path="res://data/locations/death_woods.tres" id="13_we0pa"]
+[ext_resource type="Texture2D" uid="uid://wuq5d5owamb" path="res://assets/props/treePine.png" id="14_js8pn"]
+[ext_resource type="Texture2D" uid="uid://cdcobp6vf1qly" path="res://assets/bar_bg.png" id="20_k4e7q"]
+[ext_resource type="Texture2D" uid="uid://jyn5h0jii3rx" path="res://assets/nine-patch.png" id="21_1qqg1"]
+[ext_resource type="Texture2D" uid="uid://dr3obalr85jra" path="res://assets/bar_fg.png" id="21_kptya"]
+[ext_resource type="Script" path="res://source/game/hud/RestFade/RestFade.gd" id="21_ms4qe"]
+
+[sub_resource type="Animation" id="Animation_nmsqv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.0823529, 0.0823529, 0.0823529, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_hvtac"]
+resource_name = "rest"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.0823529, 0.0823529, 0.0823529, 0), Color(0.0823529, 0.0823529, 0.0823529, 1), Color(0.0823529, 0.0823529, 0.0823529, 1), Color(0.0823529, 0.0823529, 0.0823529, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_32jp6"]
+_data = {
+"RESET": SubResource("Animation_nmsqv"),
+"rest": SubResource("Animation_hvtac")
+}
+
+[node name="Map" type="Node2D"]
+script = ExtResource("1_nqorq")
+
+[node name="Nodes" type="Node2D" parent="."]
+
+[node name="Smalltown" parent="Nodes" instance=ExtResource("1_hiocq")]
+position = Vector2(239, 209)
+location = ExtResource("3_4rjre")
+goes_to = [NodePath("../Forest")]
+texture = ExtResource("4_g7nj8")
+
+[node name="Forest" parent="Nodes" instance=ExtResource("1_hiocq")]
+position = Vector2(469, 146)
+location = ExtResource("5_vokf5")
+goes_to = [NodePath("../Vivivilage")]
+texture = ExtResource("10_gp0b6")
+
+[node name="Vivivilage" parent="Nodes" instance=ExtResource("1_hiocq")]
+position = Vector2(685, 201)
+location = ExtResource("4_x31w4")
+goes_to = [NodePath("../BanditCamp"), NodePath("../Camp")]
+texture = ExtResource("6_6b4aw")
+
+[node name="BanditCamp" parent="Nodes" instance=ExtResource("1_hiocq")]
+position = Vector2(910, 115)
+location = ExtResource("9_bbo7h")
+goes_to = [NodePath("../DeathWoods")]
+texture = ExtResource("8_5n7cs")
+
+[node name="Camp" parent="Nodes" instance=ExtResource("1_hiocq")]
+position = Vector2(703, 378)
+location = ExtResource("11_4xaoi")
+goes_to = [NodePath("../DeathWoods")]
+texture = ExtResource("11_do8x2")
+
+[node name="DeathWoods" parent="Nodes" instance=ExtResource("1_hiocq")]
+position = Vector2(896, 501)
+location = ExtResource("13_we0pa")
+goes_to = [NodePath("../MapNode7"), NodePath("../MapNode8")]
+texture = ExtResource("14_js8pn")
+
+[node name="MapNode7" parent="Nodes" instance=ExtResource("1_hiocq")]
+position = Vector2(648, 643)
+location = ExtResource("13_we0pa")
+goes_to = [NodePath("../MapNode9")]
+texture = ExtResource("14_js8pn")
+
+[node name="MapNode8" parent="Nodes" instance=ExtResource("1_hiocq")]
+position = Vector2(536, 477)
+location = ExtResource("11_4xaoi")
+goes_to = [NodePath("../MapNode9")]
+texture = ExtResource("11_do8x2")
+
+[node name="MapNode9" parent="Nodes" instance=ExtResource("1_hiocq")]
+position = Vector2(265, 577)
+location = ExtResource("11_4xaoi")
+goes_to = [NodePath("../Smalltown")]
+texture = ExtResource("11_do8x2")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("11_yw83g")
+
+[node name="LocationMenu" type="MarginContainer" parent="Control"]
+offset_left = 1007.0
+offset_right = 1279.0
+offset_bottom = 716.0
+script = ExtResource("3_q0o3h")
+
+[node name="Background" type="ColorRect" parent="Control/LocationMenu"]
+offset_right = 272.0
+offset_bottom = 716.0
+color = Color(0.227451, 0.227451, 0.227451, 1)
+
+[node name="CenterContainer" type="MarginContainer" parent="Control/LocationMenu"]
+offset_right = 272.0
+offset_bottom = 716.0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Information" type="VBoxContainer" parent="Control/LocationMenu/CenterContainer"]
+custom_minimum_size = Vector2(256, 0)
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 264.0
+offset_bottom = 708.0
+
+[node name="PlaceName" type="Label" parent="Control/LocationMenu/CenterContainer/Information"]
+offset_right = 256.0
+offset_bottom = 26.0
+text = "Smalltown"
+
+[node name="PlaceDescription" type="Label" parent="Control/LocationMenu/CenterContainer/Information"]
+offset_top = 30.0
+offset_right = 256.0
+offset_bottom = 134.0
+text = "dubidubid ubi dbudibdubidbudibdubdibdu dubi dbud ibud iubdiubdi ubidu iudibud"
+autowrap_mode = 2
+
+[node name="AvailableActions" type="VBoxContainer" parent="Control/LocationMenu/CenterContainer/Information"]
+offset_top = 138.0
+offset_right = 256.0
+offset_bottom = 274.0
+
+[node name="Raid" type="Button" parent="Control/LocationMenu/CenterContainer/Information/AvailableActions"]
+offset_right = 256.0
+offset_bottom = 31.0
+text = "raid"
+script = ExtResource("6_aspfx")
+action = 0
+
+[node name="Trade" type="Button" parent="Control/LocationMenu/CenterContainer/Information/AvailableActions"]
+offset_top = 35.0
+offset_right = 256.0
+offset_bottom = 66.0
+text = "trade"
+script = ExtResource("6_aspfx")
+action = 2
+
+[node name="Recruit" type="Button" parent="Control/LocationMenu/CenterContainer/Information/AvailableActions"]
+offset_top = 70.0
+offset_right = 256.0
+offset_bottom = 101.0
+text = "recruit"
+script = ExtResource("6_aspfx")
+action = 3
+
+[node name="Rest" type="Button" parent="Control/LocationMenu/CenterContainer/Information/AvailableActions"]
+offset_top = 105.0
+offset_right = 256.0
+offset_bottom = 136.0
+text = "rest"
+script = ExtResource("6_aspfx")
+action = 1
+
+[node name="ControlsDisplay" type="HBoxContainer" parent="Control"]
+offset_left = 9.0
+offset_top = 669.0
+offset_right = 209.0
+offset_bottom = 709.0
+
+[node name="Action1" type="Label" parent="Control/ControlsDisplay"]
+offset_top = 7.0
+offset_right = 60.0
+offset_bottom = 33.0
+text = "Z Select"
+
+[node name="Action2" type="Label" parent="Control/ControlsDisplay"]
+offset_left = 64.0
+offset_top = 8.0
+offset_right = 65.0
+offset_bottom = 31.0
+
+[node name="ChooseUnit" parent="Control" instance=ExtResource("9_gywco")]
+offset_right = 1281.0
+offset_bottom = 718.0
+
+[node name="StatusDisplay" type="HBoxContainer" parent="Control"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 368.0
+offset_bottom = 34.0
+alignment = 1
+script = ExtResource("10_1b703")
+
+[node name="GoldIndicator" type="Label" parent="Control/StatusDisplay"]
+offset_right = 41.0
+offset_bottom = 26.0
+text = "Gold:"
+
+[node name="Gold" type="Label" parent="Control/StatusDisplay"]
+offset_left = 45.0
+offset_right = 73.0
+offset_bottom = 26.0
+text = "100"
+
+[node name="PopulationIndicator" type="Label" parent="Control/StatusDisplay"]
+offset_left = 77.0
+offset_right = 166.0
+offset_bottom = 26.0
+text = "Population:"
+
+[node name="Population" type="Label" parent="Control/StatusDisplay"]
+offset_left = 170.0
+offset_right = 180.0
+offset_bottom = 26.0
+text = "0"
+
+[node name="Food" type="Label" parent="Control/StatusDisplay"]
+offset_left = 184.0
+offset_right = 227.0
+offset_bottom = 26.0
+text = "Food:"
+
+[node name="FoodBar" type="TextureProgressBar" parent="Control/StatusDisplay"]
+texture_filter = 1
+custom_minimum_size = Vector2(100, 0)
+offset_left = 231.0
+offset_right = 331.0
+offset_bottom = 26.0
+size_flags_vertical = 3
+value = 50.0
+nine_patch_stretch = true
+stretch_margin_left = 8
+stretch_margin_top = 8
+stretch_margin_right = 8
+stretch_margin_bottom = 8
+texture_under = ExtResource("20_k4e7q")
+texture_progress = ExtResource("21_kptya")
+
+[node name="Label" type="Label" parent="Control/StatusDisplay/FoodBar"]
+offset_right = 100.0
+offset_bottom = 26.0
+text = "10/10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Actions" type="Label" parent="Control/StatusDisplay"]
+offset_left = 335.0
+offset_right = 360.0
+offset_bottom = 26.0
+text = "0/2"
+
+[node name="TargetName" type="Label" parent="Control"]
+offset_right = 1280.0
+offset_bottom = 120.0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Notification" type="CenterContainer" parent="Control"]
+custom_minimum_size = Vector2(1280, 720)
+offset_right = 215.0
+offset_bottom = 68.0
+script = ExtResource("8_lcl62")
+
+[node name="Background" type="ColorRect" parent="Control/Notification"]
+custom_minimum_size = Vector2(1280, 720)
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0, 0, 0, 0.156863)
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/Notification"]
+offset_left = 532.0
+offset_top = 311.0
+offset_right = 747.0
+offset_bottom = 409.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Control/Notification/MarginContainer"]
+texture_filter = 1
+offset_right = 215.0
+offset_bottom = 98.0
+texture = ExtResource("21_1qqg1")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/Notification/MarginContainer"]
+offset_right = 215.0
+offset_bottom = 98.0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Notification/MarginContainer/MarginContainer"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 207.0
+offset_bottom = 90.0
+
+[node name="Label" type="Label" parent="Control/Notification/MarginContainer/MarginContainer/VBoxContainer"]
+offset_right = 199.0
+offset_bottom = 52.0
+text = "Action points restored
+Party consumed XXX food"
+
+[node name="ActionInstruction" type="Label" parent="Control/Notification/MarginContainer/MarginContainer/VBoxContainer"]
+offset_top = 56.0
+offset_right = 199.0
+offset_bottom = 82.0
+text = "Z to close"
+horizontal_alignment = 2
+
+[node name="RestMenu" type="ColorRect" parent="Control"]
+custom_minimum_size = Vector2(1280, 720)
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0.0823529, 0.0823529, 0.0823529, 0)
+script = ExtResource("21_ms4qe")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/RestMenu"]
+libraries = {
+"": SubResource("AnimationLibrary_32jp6")
+}

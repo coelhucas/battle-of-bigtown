@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://bjt5e50raeltk"]
+
+[ext_resource type="Script" path="res://source/game/map/MapNode.gd" id="1_q8g0v"]
+[ext_resource type="Shader" path="res://assets/shaders/grayscale.gdshader" id="2_a8a80"]
+[ext_resource type="Texture2D" uid="uid://cxq27p8s4cwwr" path="res://assets/props/castle.png" id="3_ui6dc"]
+[ext_resource type="Texture2D" uid="uid://drs7dum3c280v" path="res://assets/selection_indicator.png" id="4_mja4a"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rlcco"]
+shader = ExtResource("2_a8a80")
+shader_parameter/is_enabled = false
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1stku"]
+size = Vector2(132, 130)
+
+[node name="MapNode" type="Area2D"]
+script = ExtResource("1_q8g0v")
+
+[node name="Background" type="ColorRect" parent="."]
+offset_left = -38.0
+offset_top = -38.0
+offset_right = 38.0
+offset_bottom = 38.0
+color = Color(0.415686, 0.690196, 0.192157, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_rlcco")
+texture = ExtResource("3_ui6dc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_1stku")
+
+[node name="CurrentIndicator" type="Sprite2D" parent="."]
+position = Vector2(0, -49)
+texture = ExtResource("4_mja4a")

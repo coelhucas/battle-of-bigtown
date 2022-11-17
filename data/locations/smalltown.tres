@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://0s5dlwaiowao"]
+
+[ext_resource type="Script" path="res://source/game/map/GameLocation.gd" id="1_8i2ew"]
+
+[resource]
+script = ExtResource("1_8i2ew")
+name = "Smalltown"
+description = "dubidubi tupi"
+available_actions = [3, 1]
+army = null
+population = null
+hostile = false
+base_strength = null
+population_size = null

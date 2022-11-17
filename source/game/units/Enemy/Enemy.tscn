@@ -1,0 +1,136 @@
+[gd_scene load_steps=15 format=3 uid="uid://jjywkee5j1h3"]
+
+[ext_resource type="Script" path="res://source/game/units/Enemy/Enemy.gd" id="1_i36l4"]
+[ext_resource type="Resource" uid="uid://d0c8yvlikoohk" path="res://data/stats/dummy.tres" id="2_284mq"]
+[ext_resource type="Script" path="res://source/game/units/Enemy/StateManager.gd" id="2_tyoj4"]
+[ext_resource type="Texture2D" uid="uid://ilkmew2i6vnb" path="res://assets/human.png" id="3_6e66e"]
+[ext_resource type="Script" path="res://source/game/units/Enemy/states/LookForTarget.gd" id="3_cqf4t"]
+[ext_resource type="Script" path="res://source/game/units/Enemy/states/Attack.gd" id="5_ugi6l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cisrk"]
+size = Vector2(4, 3)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q42jl"]
+size = Vector2(128, 128)
+
+[sub_resource type="Animation" id="Animation_lw3gc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_6qbdt"]
+resource_name = "attack"
+length = 0.2
+
+[sub_resource type="Animation" id="Animation_xvs0k"]
+resource_name = "attack_human"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_4fdus"]
+resource_name = "idle_human"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_cxdx6"]
+resource_name = "walk_human"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qpjnb"]
+_data = {
+"RESET": SubResource("Animation_lw3gc"),
+"attack": SubResource("Animation_6qbdt"),
+"attack_human": SubResource("Animation_xvs0k"),
+"idle_human": SubResource("Animation_4fdus"),
+"walk_human": SubResource("Animation_cxdx6")
+}
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 5
+script = ExtResource("1_i36l4")
+stats = ExtResource("2_284mq")
+creature = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.996078, 0.0901961, 0.270588, 1)
+texture_filter = 1
+position = Vector2(0, -3)
+texture = ExtResource("3_6e66e")
+hframes = 12
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1.5)
+shape = SubResource("RectangleShape2D_cisrk")
+
+[node name="StateManager" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_tyoj4")
+initial_state = NodePath("LookForTarget")
+
+[node name="LookForTarget" type="Node" parent="StateManager" node_paths=PackedStringArray("attack_state")]
+script = ExtResource("3_cqf4t")
+attack_state = NodePath("../Attack")
+animation = "walk"
+
+[node name="Attack" type="Node" parent="StateManager" node_paths=PackedStringArray("look_for_target_state")]
+script = ExtResource("5_ugi6l")
+look_for_target_state = NodePath("../LookForTarget")
+animation = "attack"
+
+[node name="FOVRadius" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 34
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FOVRadius"]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_q42jl")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "walk_human"
+libraries = {
+"": SubResource("AnimationLibrary_qpjnb")
+}

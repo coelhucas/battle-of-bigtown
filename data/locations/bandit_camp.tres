@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://boo5s4sokpx1i"]
+
+[ext_resource type="Script" path="res://source/game/map/GameLocation.gd" id="1_8i2ew"]
+
+[resource]
+script = ExtResource("1_8i2ew")
+name = "Bandit Camp"
+description = "There are some bandits there and they seem hostile towards you. Doesn't seem a good place to stay in."
+available_actions = [0, 1]
+army = []
+population = null
+hostile = true
+base_strength = 1.5
+population_size = 10.0

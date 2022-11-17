@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://1lctbbkfaddi"]
+
+[ext_resource type="Script" path="res://source/game/manager/Main.gd" id="1_hqigh"]
+[ext_resource type="Script" path="res://source/game/manager/World.gd" id="2_a75s7"]
+[ext_resource type="Resource" uid="uid://d0c8yvlikoohk" path="res://data/stats/dummy.tres" id="3_mknx3"]
+[ext_resource type="PackedScene" uid="uid://4q0ulsbcrisf" path="res://source/game/hud/ResultScreen/ResultScreen.tscn" id="4_4tkmf"]
+[ext_resource type="Resource" uid="uid://0s5dlwaiowao" path="res://data/locations/smalltown.tres" id="4_5k5i4"]
+[ext_resource type="Shader" path="res://assets/shaders/crt.gdshader" id="5_jw3k8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_74a70"]
+shader = ExtResource("5_jw3k8")
+shader_parameter/aberration = 0.01
+shader_parameter/brightness = 1.4
+shader_parameter/clip_warp = false
+shader_parameter/discolor = true
+shader_parameter/distort_intensity = 0.02
+shader_parameter/grille_opacity = 0.15
+shader_parameter/noise_opacity = 0.2
+shader_parameter/noise_speed = 5.0
+shader_parameter/overlay = false
+shader_parameter/pixelate = false
+shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/roll = false
+shader_parameter/roll_size = 0.0
+shader_parameter/roll_speed = 8.0
+shader_parameter/roll_variation = 0.1
+shader_parameter/scanlines_opacity = 0.4
+shader_parameter/scanlines_width = 0.25
+shader_parameter/static_noise_intensity = 0.04
+shader_parameter/vignette_intensity = 0.25
+shader_parameter/vignette_opacity = 0.2
+shader_parameter/warp_amount = 0.0
+
+[node name="Main" type="Node"]
+script = ExtResource("1_hqigh")
+
+[node name="World" type="Node2D" parent="."]
+script = ExtResource("2_a75s7")
+party = [ExtResource("3_mknx3"), ExtResource("3_mknx3")]
+initial_location = ExtResource("4_5k5i4")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="ResultScreen" parent="UI" instance=ExtResource("4_4tkmf")]
+
+[node name="CRTShader" type="ColorRect" parent="UI"]
+material = SubResource("ShaderMaterial_74a70")
+custom_minimum_size = Vector2(1280, 720)
+offset_right = 1280.0
+offset_bottom = 720.0
+mouse_filter = 2

@@ -1,0 +1,48 @@
+[gd_scene load_steps=2 format=3 uid="uid://4q0ulsbcrisf"]
+
+[ext_resource type="Script" path="res://source/game/hud/ResultScreen/ResultScreen.gd" id="1_aq0dl"]
+
+[node name="ResultScreen" type="CenterContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_aq0dl")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+offset_left = 581.0
+offset_top = 324.0
+offset_right = 699.0
+offset_bottom = 396.0
+pivot_offset = Vector2(58, 32)
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer"]
+offset_right = 118.0
+offset_bottom = 72.0
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
+offset_right = 118.0
+offset_bottom = 72.0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 110.0
+offset_bottom = 64.0
+
+[node name="Result" type="Label" parent="MarginContainer/MarginContainer/HBoxContainer"]
+offset_right = 102.0
+offset_bottom = 26.0
+text = "you dead"
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/HBoxContainer"]
+offset_top = 30.0
+offset_right = 102.0
+offset_bottom = 56.0
+text = "Z to continue"
