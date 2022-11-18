@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://1lctbbkfaddi"]
+[gd_scene load_steps=8 format=3 uid="uid://1lctbbkfaddi"]
 
 [ext_resource type="Script" path="res://source/game/manager/Main.gd" id="1_hqigh"]
 [ext_resource type="Script" path="res://source/game/manager/World.gd" id="2_a75s7"]
-[ext_resource type="Resource" uid="uid://d0c8yvlikoohk" path="res://data/stats/dummy.tres" id="3_mknx3"]
 [ext_resource type="PackedScene" uid="uid://4q0ulsbcrisf" path="res://source/game/hud/ResultScreen/ResultScreen.tscn" id="4_4tkmf"]
 [ext_resource type="Resource" uid="uid://dchfjy0cha2ks" path="res://data/locations/bigtown.tres" id="4_a2opb"]
 [ext_resource type="Shader" path="res://assets/shaders/crt.gdshader" id="5_jw3k8"]
@@ -37,7 +36,7 @@ script = ExtResource("1_hqigh")
 
 [node name="World" type="Node2D" parent="."]
 script = ExtResource("2_a75s7")
-party = [ExtResource("3_mknx3"), ExtResource("3_mknx3")]
+party = []
 initial_location = ExtResource("4_a2opb")
 
 [node name="UI" type="CanvasLayer" parent="."]

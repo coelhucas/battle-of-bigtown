@@ -2,7 +2,7 @@ extends BasePlayerState
 
 @export var look_for_target_state: BasePlayerState
 
-const OFFSET_X := 32
+const OFFSET_X := 12
 
 var should_fight_back := false
 

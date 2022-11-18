@@ -18,6 +18,9 @@ signal aggro()
 			
 		if self.buffs.has(Enums.Buff.HEALTHY):
 			_base_damage *= 1.75
+		
+		if role == Enums.Class.RANGED:
+			_base_damage *= 1.25
 		return _base_damage
 @export var price := 1.0
 @export var name: String

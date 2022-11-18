@@ -30,7 +30,7 @@
     - [x] Hunger debuff
 - [x] Show locations army size
 ~~- [ ] Punish player on defeat~~
-- [ ] Spawn archers behind warriors
+- [x] Spawn archers behind warriors
 - [ ] Check for collisions before spawning
 
 ----

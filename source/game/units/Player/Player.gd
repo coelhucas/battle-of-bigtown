@@ -94,7 +94,7 @@ func _input(event: InputEvent):
 		if selecting_order and selected_action != Enums.PlayerCommand.NONE:
 			for node in units_in_command_range:
 				if is_instance_valid(node) and not node.playable:
-					node.state_manager.receive_command(selected_action, facing_dir)
+					node.state_manager.receive_command(selected_action, facing_dir, self)
 					node.hide_selection()
 			
 		if selected_action == Enums.PlayerCommand.ATTACK:

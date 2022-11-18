@@ -29,10 +29,16 @@ func setup(_world: WorldManager) -> void:
 func spawn_player(_stats: UnitStats, _playable: bool = false) -> void:
 	var _unit_scene: Node2D = ReferenceStash.SCENE_PLAYER_UNIT.instantiate()
 	add_child(_unit_scene)
-	_unit_scene.global_position = Vector2(
-		player_spawn.global_position.x + randi_range(player_spawn_area.position.x, player_spawn_area.size.x / 2),
-		player_spawn.global_position.y + randi_range(player_spawn_area.position.y, player_spawn_area.size.y / 2),
-	)
+	if _stats.role == Enums.Class.RANGED:
+		_unit_scene.global_position = Vector2(
+			player_spawn.global_position.x + randi_range(player_spawn_area.position.x, player_spawn_area.size.x / 4),
+			player_spawn.global_position.y + randi_range(player_spawn_area.position.y, player_spawn_area.size.y / 4),
+		)
+	else:
+		_unit_scene.global_position = Vector2(
+			player_spawn.global_position.x + randi_range(player_spawn_area.position.x + player_spawn_area.size.x / 4, player_spawn_area.size.x / 2),
+			player_spawn.global_position.y + randi_range(player_spawn_area.position.y + player_spawn_area.size.y / 4, player_spawn_area.size.y / 2),
+		)
 	
 	_unit_scene.playable = _playable
 	_unit_scene.stats = _stats
@@ -53,10 +59,16 @@ func spawn(_player_party: Array[UnitStats], _enemy_party: Array[UnitStats]) -> v
 	for _unit in _enemy_party:
 		var _unit_scene: Node2D = ReferenceStash.SCENE_ENEMY_UNIT.instantiate()
 		add_child(_unit_scene)
-		_unit_scene.global_position = Vector2(
-			enemy_spawn.global_position.x + randi_range(enemy_spawn_area.position.x, enemy_spawn_area.size.x / 2),
-			enemy_spawn.global_position.y + randi_range(enemy_spawn_area.position.y, enemy_spawn_area.size.y / 2),
-		)
+		if _unit.role == Enums.Class.RANGED:
+			_unit_scene.global_position = Vector2(
+				enemy_spawn.global_position.x + randi_range(enemy_spawn_area.position.x + enemy_spawn_area.size.x / 4, enemy_spawn_area.size.x / 2),
+				enemy_spawn.global_position.y + randi_range(enemy_spawn_area.position.y + enemy_spawn_area.size.x / 4, enemy_spawn_area.size.y / 2),
+			)
+		else:
+			_unit_scene.global_position = Vector2(
+				enemy_spawn.global_position.x + randi_range(enemy_spawn_area.position.x, enemy_spawn_area.size.x / 4),
+				enemy_spawn.global_position.y + randi_range(enemy_spawn_area.position.y, enemy_spawn_area.size.y / 4),
+			)
 		_unit_scene.stats = _unit
 		_unit_scene.stats.connect("died", _on_unit_died.bind(_unit_scene))
 		_unit_scene.setup_stats()

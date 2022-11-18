@@ -20,9 +20,10 @@ func init(_player) -> void:
 	change_state(initial_state)
 
 
-func receive_command(_command: Enums.PlayerCommand, _dir: int) -> void:
+func receive_command(_command: Enums.PlayerCommand, _dir: int, _lead: CharacterBody2D) -> void:
 	var _next_state: BasePlayerState
 	player.target_direction = _dir
+	player.lead = _lead
 	match _command:
 		Enums.PlayerCommand.ATTACK:
 			_next_state = look_for_target_state
