@@ -61,7 +61,7 @@ func add_buff(_buff: Enums.Buff):
 		buffs.append(_buff)
 	
 	if _buff == Enums.Buff.HUNGRY and hp == max_hp:
-		hp = max_hp * 0.5
+		hp = max_hp * 0.7
 		
 	if _buff == Enums.Buff.HEALTHY and hp == max_hp:
 		hp = max_hp * 1.5

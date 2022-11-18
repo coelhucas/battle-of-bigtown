@@ -11,4 +11,4 @@ army = null
 population = null
 hostile = false
 base_strength = 5.0
-population_size = 20.0
+population_size = 100.0

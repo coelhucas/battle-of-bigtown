@@ -62,8 +62,8 @@ func remove_unit(_unit: UnitStats) -> void:
 	location.available_for_hire.erase(_unit)
 	
 func reset_population() -> void:
-	location.base_strength += 0.5
-	location.population_size += int(clamp(randi_range(location.population_size * 0.3, location.population_size * 0.6), 1, 20))
+	location.base_strength += 0.25
+	location.population_size += int(clamp(randi_range(location.population_size * 0.1, location.population_size * 0.4), 1, 20))
 	location.just_fighted = true
 
 func unfocus():
