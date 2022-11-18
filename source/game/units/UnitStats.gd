@@ -15,8 +15,6 @@ signal aggro()
 		var _base_damage: float = damage
 		if self.buffs.has(Enums.Buff.TIRED):
 			_base_damage *= 0.40
-		else:
-			_base_damage = 10.0
 		return _base_damage
 @export var price := 1.0
 @export var name: String

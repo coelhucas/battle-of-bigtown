@@ -8,7 +8,7 @@ var origin: MapNode
 
 var _selected_option: int = 0:
 	set(_selected):
-		if _selected_option != _selected:
+		if _selected_option != _selected and _selected_option < container.get_child_count():
 			var _previous_opt: Control = container.get_child(_selected_option)
 			if is_instance_valid(_previous_opt):
 				_previous_opt.selection_indicator.hide()

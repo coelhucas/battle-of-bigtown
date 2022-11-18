@@ -132,17 +132,20 @@ theme = ExtResource("15_6utmg")
 script = ExtResource("11_yw83g")
 
 [node name="LocationMenu" type="MarginContainer" parent="Control"]
+layout_mode = 0
 offset_left = 1007.0
 offset_right = 1279.0
 offset_bottom = 716.0
 script = ExtResource("3_q0o3h")
 
 [node name="Background" type="ColorRect" parent="Control/LocationMenu"]
+layout_mode = 2
 offset_right = 272.0
 offset_bottom = 716.0
 color = Color(0.227451, 0.227451, 0.227451, 1)
 
 [node name="CenterContainer" type="MarginContainer" parent="Control/LocationMenu"]
+layout_mode = 2
 offset_right = 272.0
 offset_bottom = 716.0
 theme_override_constants/margin_left = 8
@@ -152,17 +155,20 @@ theme_override_constants/margin_bottom = 8
 
 [node name="Information" type="VBoxContainer" parent="Control/LocationMenu/CenterContainer"]
 custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 264.0
 offset_bottom = 708.0
 
 [node name="PlaceName" type="Label" parent="Control/LocationMenu/CenterContainer/Information"]
+layout_mode = 2
 offset_right = 256.0
 offset_bottom = 33.0
 text = "Smalltown"
 
 [node name="PlaceDescription" type="Label" parent="Control/LocationMenu/CenterContainer/Information"]
+layout_mode = 2
 offset_top = 37.0
 offset_right = 256.0
 offset_bottom = 192.0
@@ -171,11 +177,13 @@ text = "dubidubid ubi dbudibdubidbudibdubdibdu dubi dbud ibud iubdiubdi ubidu iu
 autowrap_mode = 2
 
 [node name="AvailableActions" type="VBoxContainer" parent="Control/LocationMenu/CenterContainer/Information"]
+layout_mode = 2
 offset_top = 196.0
 offset_right = 256.0
 offset_bottom = 360.0
 
 [node name="Raid" type="Button" parent="Control/LocationMenu/CenterContainer/Information/AvailableActions"]
+layout_mode = 2
 offset_right = 256.0
 offset_bottom = 38.0
 text = "raid"
@@ -183,6 +191,7 @@ script = ExtResource("6_aspfx")
 action = 0
 
 [node name="Trade" type="Button" parent="Control/LocationMenu/CenterContainer/Information/AvailableActions"]
+layout_mode = 2
 offset_top = 42.0
 offset_right = 256.0
 offset_bottom = 80.0
@@ -191,6 +200,7 @@ script = ExtResource("6_aspfx")
 action = 2
 
 [node name="Recruit" type="Button" parent="Control/LocationMenu/CenterContainer/Information/AvailableActions"]
+layout_mode = 2
 offset_top = 84.0
 offset_right = 256.0
 offset_bottom = 122.0
@@ -199,6 +209,7 @@ script = ExtResource("6_aspfx")
 action = 3
 
 [node name="Rest" type="Button" parent="Control/LocationMenu/CenterContainer/Information/AvailableActions"]
+layout_mode = 2
 offset_top = 126.0
 offset_right = 256.0
 offset_bottom = 164.0
@@ -207,28 +218,33 @@ script = ExtResource("6_aspfx")
 action = 1
 
 [node name="ControlsDisplay" type="HBoxContainer" parent="Control"]
+layout_mode = 0
 offset_left = 9.0
 offset_top = 669.0
 offset_right = 209.0
 offset_bottom = 709.0
 
 [node name="Action1" type="Label" parent="Control/ControlsDisplay"]
+layout_mode = 2
 offset_top = 3.0
 offset_right = 89.0
 offset_bottom = 36.0
 text = "Z Select"
 
 [node name="Action2" type="Label" parent="Control/ControlsDisplay"]
+layout_mode = 2
 offset_left = 93.0
 offset_top = 5.0
 offset_right = 94.0
 offset_bottom = 35.0
 
 [node name="ChooseUnit" parent="Control" instance=ExtResource("9_gywco")]
+layout_mode = 0
 offset_right = 1281.0
 offset_bottom = 718.0
 
 [node name="StatusDisplay" type="HBoxContainer" parent="Control"]
+layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 368.0
@@ -237,29 +253,34 @@ alignment = 1
 script = ExtResource("10_1b703")
 
 [node name="GoldIndicator" type="Label" parent="Control/StatusDisplay"]
+layout_mode = 2
 offset_right = 55.0
 offset_bottom = 33.0
 text = "Gold:"
 
 [node name="Gold" type="Label" parent="Control/StatusDisplay"]
+layout_mode = 2
 offset_left = 59.0
 offset_right = 95.0
 offset_bottom = 33.0
 text = "100"
 
 [node name="PopulationIndicator" type="Label" parent="Control/StatusDisplay"]
+layout_mode = 2
 offset_left = 99.0
 offset_right = 224.0
 offset_bottom = 33.0
 text = "Population:"
 
 [node name="Population" type="Label" parent="Control/StatusDisplay"]
+layout_mode = 2
 offset_left = 228.0
 offset_right = 242.0
 offset_bottom = 33.0
 text = "0"
 
 [node name="Food" type="Label" parent="Control/StatusDisplay"]
+layout_mode = 2
 offset_left = 246.0
 offset_right = 306.0
 offset_bottom = 33.0
@@ -268,6 +289,7 @@ text = "Food:"
 [node name="FoodBar" type="TextureProgressBar" parent="Control/StatusDisplay"]
 texture_filter = 1
 custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
 offset_left = 310.0
 offset_right = 410.0
 offset_bottom = 33.0
@@ -282,6 +304,7 @@ texture_under = ExtResource("20_k4e7q")
 texture_progress = ExtResource("21_kptya")
 
 [node name="Label" type="Label" parent="Control/StatusDisplay/FoodBar"]
+layout_mode = 0
 offset_right = 100.0
 offset_bottom = 26.0
 text = "10/10"
@@ -289,12 +312,14 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Actions" type="Label" parent="Control/StatusDisplay"]
+layout_mode = 2
 offset_left = 414.0
 offset_right = 456.0
 offset_bottom = 33.0
 text = "0/2"
 
 [node name="TargetName" type="Label" parent="Control"]
+layout_mode = 0
 offset_right = 1280.0
 offset_bottom = 120.0
 horizontal_alignment = 1
@@ -302,11 +327,20 @@ vertical_alignment = 1
 
 [node name="Notification" type="CenterContainer" parent="Control"]
 custom_minimum_size = Vector2(1280, 720)
+layout_mode = 0
 offset_right = 1280.0
 offset_bottom = 720.0
 script = ExtResource("8_lcl62")
 
+[node name="Backgrounds1" type="ColorRect" parent="Control/Notification"]
+custom_minimum_size = Vector2(1280, 720)
+layout_mode = 2
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0, 0, 0, 0.192157)
+
 [node name="MarginContainer" type="MarginContainer" parent="Control/Notification"]
+layout_mode = 2
 offset_left = 448.0
 offset_top = 302.0
 offset_right = 832.0
@@ -314,6 +348,7 @@ offset_bottom = 417.0
 
 [node name="NinePatchRect" type="NinePatchRect" parent="Control/Notification/MarginContainer"]
 texture_filter = 1
+layout_mode = 2
 offset_right = 384.0
 offset_bottom = 115.0
 texture = ExtResource("21_1qqg1")
@@ -323,6 +358,7 @@ patch_margin_right = 8
 patch_margin_bottom = 8
 
 [node name="MarginContainer" type="MarginContainer" parent="Control/Notification/MarginContainer"]
+layout_mode = 2
 offset_right = 384.0
 offset_bottom = 115.0
 theme_override_constants/margin_left = 8
@@ -331,12 +367,14 @@ theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/Notification/MarginContainer/MarginContainer"]
+layout_mode = 2
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 376.0
 offset_bottom = 107.0
 
 [node name="Label" type="Label" parent="Control/Notification/MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
 offset_right = 368.0
 offset_bottom = 62.0
 theme = ExtResource("18_tsemm")
@@ -344,6 +382,7 @@ text = "Action points restored
 Party consumed XXX food"
 
 [node name="ActionInstruction" type="Label" parent="Control/Notification/MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
 offset_top = 66.0
 offset_right = 368.0
 offset_bottom = 99.0
@@ -358,6 +397,7 @@ volume_db = -15.0
 
 [node name="RestMenu" type="ColorRect" parent="Control"]
 custom_minimum_size = Vector2(1280, 720)
+layout_mode = 0
 offset_right = 1280.0
 offset_bottom = 720.0
 color = Color(0.0823529, 0.0823529, 0.0823529, 0)

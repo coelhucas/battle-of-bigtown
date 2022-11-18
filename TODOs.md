@@ -9,8 +9,6 @@
 - [x] Do not show again result screen if it is already visible
 - [X] Make map (with full cycle)
 
-- [ ] Add food
-    - [ ] Hunger debuff
 - [x] Make characters change target after some distance
 - [x] Show kills and losses on result screen
 
@@ -21,14 +19,16 @@
     [x] Notification
     [x] Actual debuff on units
 - [x] Improve performance
+- [x] Make places get stronger after each "turn"
 
-- [ ] Check for collisions before spawning
-- [ ] Improve interfaces
 - [ ] Create last 3 locations in game
+- [ ] Improve interfaces
 - [ ] Add an ending (win a battle against smalltown?)
-- [ ] Make places get stronger after each "turn"
 - [ ] Fix horizontal input for giving orders
 - [ ] Punish player on defeat
+- [ ] Check for collisions before spawning
+- [ ] Add food
+    - [ ] Hunger debuff
 
 ----
 

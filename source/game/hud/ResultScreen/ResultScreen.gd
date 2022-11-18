@@ -29,7 +29,7 @@ func open(_winner: Enums.Team, _gold: int = 0) -> void:
 	if container.modulate.a > 0.0: return
 	
 	if _winner == Enums.Team.PLAYER:
-		add_coin_timer.wait_time = 1 / _gold * 0.2
+		add_coin_timer.wait_time = clamp(1 / _gold * 0.2, 0.05, 2.0)
 		label_result.text = RESULT_STRING % "won"
 		sfx_victory.play()
 	else:
