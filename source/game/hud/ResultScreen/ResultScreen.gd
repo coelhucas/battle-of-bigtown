@@ -23,10 +23,10 @@ func _ready() -> void:
 	set_process_input(false)
 
 func open(_winner: Enums.Team, _gold: int = 0) -> void:
+	if container.modulate.a > 0.0: return
 	last_winner = _winner
 	displayed_coins = 0
 	total_coins = _gold
-	if container.modulate.a > 0.0: return
 	
 	if _winner == Enums.Team.PLAYER:
 		add_coin_timer.wait_time = clamp(1 / _gold * 0.2, 0.05, 2.0)
