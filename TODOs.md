@@ -25,8 +25,8 @@
 - [x] Create last 3 locations in game
 - [x] Add an ending (win a battle against smalltown?)
 - [x] Improve interfaces
+- [x] Fix horizontal input for giving orders
 
-- [ ] Fix horizontal input for giving orders
 - [ ] Punish player on defeat
 - [ ] Check for collisions before spawning
 - [ ] Add food

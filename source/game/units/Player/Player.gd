@@ -84,7 +84,9 @@ func _input(event: InputEvent):
 			if not _unit.playable:
 				_unit.show_selection()
 	
-	if event.is_action_released("action_2"):
+	if event.is_action_released("action_2") and selecting_order:
+		if Input.is_action_pressed("ui_left"):
+			pass
 		for _unit in units_in_command_range:
 			if is_instance_valid(_unit):
 				_unit.hide_selection()
@@ -104,23 +106,24 @@ func _input(event: InputEvent):
 		selecting_order = false
 		selected_action = Enums.PlayerCommand.NONE
 		action_display.hide()
+
+func _process(delta):
+	if playable:
+		if Input.is_action_just_pressed("ui_left"):
+			selected_action = Enums.PlayerCommand.DEFEND
+			action_display.set_action(selected_action)
 	
-	if event.is_action_pressed("ui_left") and selecting_order:
-		selected_action = Enums.PlayerCommand.DEFEND
-		action_display.set_action(selected_action)
-	
-	if event.is_action_pressed("ui_right") and selecting_order:
-		selected_action = Enums.PlayerCommand.ATTACK
-		action_display.set_action(selected_action)
-	
-	if event.is_action_released("ui_left") and selected_action == Enums.PlayerCommand.DEFEND:
-		selected_action = Enums.PlayerCommand.NONE
-		action_display.set_action(selected_action)
-	
-	if event.is_action_released("ui_right") and selected_action == Enums.PlayerCommand.ATTACK:
-		selected_action = Enums.PlayerCommand.NONE
-		action_display.set_action(selected_action)
-	
+		if Input.is_action_just_pressed("ui_right"):
+			selected_action = Enums.PlayerCommand.ATTACK
+			action_display.set_action(selected_action)
+		
+		if Input.is_action_just_released("ui_left") and selected_action == Enums.PlayerCommand.DEFEND:
+			selected_action = Enums.PlayerCommand.NONE
+			action_display.set_action(selected_action)
+		
+		if Input.is_action_just_released("ui_right") and selected_action == Enums.PlayerCommand.ATTACK:
+			selected_action = Enums.PlayerCommand.NONE
+			action_display.set_action(selected_action)
 
 
 func _physics_process(delta):
