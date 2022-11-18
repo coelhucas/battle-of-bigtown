@@ -10,7 +10,7 @@ signal aggro()
 		
 		if hp <= 0:
 			emit_signal("died")
-@export var damage := 1.5:
+@export var damage := 2.5:
 	get:
 		var _base_damage: float = damage
 		if self.buffs.has(Enums.Buff.TIRED):
