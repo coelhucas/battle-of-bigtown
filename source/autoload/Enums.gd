@@ -16,7 +16,8 @@ enum Action {
 	RAID,
 	REST,
 	TRADE,
-	RECRUIT
+	RECRUIT,
+	BUY_FOOD
 }
 
 enum ControlDisplay {
@@ -40,8 +41,9 @@ enum Notification {
 }
 
 enum Buff {
-	HUNGER,
+	HUNGRY,
 	TIRED,
+	HEALTHY,
 }
 
 enum Class {

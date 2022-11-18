@@ -15,6 +15,9 @@ signal aggro()
 		var _base_damage: float = damage
 		if self.buffs.has(Enums.Buff.TIRED):
 			_base_damage *= 0.40
+			
+		if self.buffs.has(Enums.Buff.HEALTHY):
+			_base_damage *= 1.75
 		return _base_damage
 @export var price := 1.0
 @export var name: String
@@ -53,6 +56,12 @@ func has_hit() -> bool:
 func add_buff(_buff: Enums.Buff):
 	if not buffs.has(_buff):
 		buffs.append(_buff)
+	
+	if _buff == Enums.Buff.HUNGRY and hp == max_hp:
+		hp = max_hp * 0.5
+		
+	if _buff == Enums.Buff.HEALTHY and hp == max_hp:
+		hp = max_hp * 1.5
 
 func remove_buff(_buff: Enums.Buff):
 	buffs.erase(_buff)

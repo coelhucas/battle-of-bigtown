@@ -140,18 +140,33 @@ func _input(event: InputEvent):
 		State.RECRUITING:
 			_handle_recruiting_selection(event)
 
+func get_proper_notification() -> int:
+	if Globals.used_actions >= Globals.MAX_ACTIONS and Globals.food <= 0:
+		return Enums.Notification.DEBUFF_TIRED_AND_HUNGRY
+	
+	if Globals.used_actions >= Globals.MAX_ACTIONS:
+		return Enums.Notification.DEBUFF_TIRED
+	
+	return Enums.Notification.DEBUFF_HUNGRY
+
 
 func _on_selected_action(_action: Enums.Action):
 	match _action:
 		Enums.Action.RAID:
-			if Globals.used_actions >= Globals.MAX_ACTIONS:
-				notification.show_notification(Enums.Notification.DEBUFF_TIRED)
+			if Globals.used_actions >= Globals.MAX_ACTIONS or Globals.food == 0:
+				notification.show_notification(get_proper_notification())
 				for unit in world.party:
-					(unit as UnitStats).add_buff(Enums.Buff.TIRED)
+					(unit as UnitStats).remove_buff(Enums.Buff.HEALTHY)
+					if Globals.used_actions >= Globals.MAX_ACTIONS:
+						(unit as UnitStats).add_buff(Enums.Buff.TIRED)
+					if Globals.food <= 0:
+						(unit as UnitStats).add_buff(Enums.Buff.HUNGRY)
 				await notification.acknowledged
 			else:
 				for unit in world.party:
 					(unit as UnitStats).remove_buff(Enums.Buff.TIRED)
+					(unit as UnitStats).remove_buff(Enums.Buff.HUNGRY)
+					(unit as UnitStats).add_buff(Enums.Buff.HEALTHY)
 			emit_signal(start_battle.get_name(), current_node)
 		Enums.Action.RECRUIT:
 			recruiting_menu.origin = current_node
@@ -166,6 +181,10 @@ func _on_selected_action(_action: Enums.Action):
 			await rest_menu.reached_black_screen
 			notification.show_notification(Enums.Notification.ON_REST)
 			EventBus.emit_signal("rest_party")
+		Enums.Action.BUY_FOOD:
+			if Globals.gold >= Globals.FOOD_PRICE:
+				Globals.food += Globals.FOOD_PACK_SIZE
+				Globals.gold -= Globals.FOOD_PRICE
 
 func _draw() -> void:
 	for node in nodes_container.get_children():

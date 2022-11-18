@@ -74,5 +74,5 @@ func _on_attempt_purchase(_unit: UnitStats):
 		sfx_denied.play()
 
 func _on_rest():
-	# TODO: remove food
+	Globals.food = clamp(Globals.food - world.party.size() * 2, 0, Globals.food)
 	used_actions = 0

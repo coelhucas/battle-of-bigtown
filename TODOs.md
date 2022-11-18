@@ -26,11 +26,11 @@
 - [x] Add an ending (win a battle against smalltown?)
 - [x] Improve interfaces
 - [x] Fix horizontal input for giving orders
+- [x] Add food
+    - [x] Hunger debuff
 
 - [ ] Punish player on defeat
 - [ ] Check for collisions before spawning
-- [ ] Add food
-    - [ ] Hunger debuff
 
 ----
 

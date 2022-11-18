@@ -9,6 +9,7 @@ signal battle_finished(winner)
 signal consume_action_point(amount)
 signal finished_game()
 # 
+signal updated_food()
 signal update_gold(gold)
 signal update_population(population)
 signal update_actions(actions)

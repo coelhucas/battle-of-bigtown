@@ -11,7 +11,7 @@ var game_manager: Node
 
 func _ready() -> void:
 	EventBus.connect(EventBus.player_died.get_name(), _on_player_died)
-	generate_debug_party(100)
+#	generate_debug_party(100)
 
 func change_scene(_new_scene: PackedScene) -> Node2D:
 	for child in get_children():
@@ -47,3 +47,4 @@ func generate_debug_party(_amount: int, base_strength: float = 1.0) -> void:
 			_unit.role = Enums.Class.RANGED
 		
 		party.append(_unit)
+	Globals.population = party.size()
