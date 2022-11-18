@@ -16,7 +16,7 @@ func show_notification(_which: Enums.Notification) -> void:
 	set_process_input(true)
 	match _which:
 		Enums.Notification.ON_REST:
-			label.text = "Action points restored\nParty consumed %s food" % 23
+			label.text = "Action points restored\nParty consumed %s food" % str(Globals.population * Globals.FOOD_PER_UNIT)
 			sfx_rest.play()
 		Enums.Notification.DEBUFF_TIRED:
 			label.text = "Your party will be weaker (-damage) on this battle\nsince they're tired."

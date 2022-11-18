@@ -5,6 +5,7 @@ signal selected_action(action)
 @onready var available_actions_container := $CenterContainer/Information/AvailableActions
 @onready var label_name := $CenterContainer/Information/PlaceName
 @onready var label_description := $CenterContainer/Information/PlaceDescription
+@onready var label_army_size := $CenterContainer/Information/ArmySize
 
 @onready var btn_rest: ActionButton = $CenterContainer/Information/AvailableActions/Rest
 @onready var btn_raid: ActionButton = $CenterContainer/Information/AvailableActions/Raid
@@ -41,6 +42,8 @@ func _on_focus_changed(_control: Control):
 func display(_location: GameLocation):
 	label_name.text = _location.name
 	label_description.text = _location.description
+	label_army_size.visible = _location.army.size() > 0
+	label_army_size.text = "Army size: %s" % _location.army.size()
 	
 	for _button in available_actions_container.get_children():
 		_button.visible = (_button as ActionButton).action in _location.available_actions

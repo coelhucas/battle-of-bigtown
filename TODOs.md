@@ -28,8 +28,9 @@
 - [x] Fix horizontal input for giving orders
 - [x] Add food
     - [x] Hunger debuff
-
-- [ ] Punish player on defeat
+- [x] Show locations army size
+~~- [ ] Punish player on defeat~~
+- [ ] Spawn archers behind warriors
 - [ ] Check for collisions before spawning
 
 ----
