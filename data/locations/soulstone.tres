@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://c5uhaojfk63h6"]
+
+[ext_resource type="Script" path="res://source/game/map/GameLocation.gd" id="1_a2rme"]
+
+[resource]
+script = ExtResource("1_a2rme")
+name = "Soulstone"
+description = "This is for many a sacred place. You find some people praying."
+available_actions = [3, 1]
+army = []
+population = null
+hostile = false
+base_strength = 5.0
+population_size = 50.0

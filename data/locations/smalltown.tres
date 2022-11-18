@@ -5,10 +5,10 @@
 [resource]
 script = ExtResource("1_8i2ew")
 name = "Smalltown"
-description = "dubidubi tupi"
+description = "This is the biggest community after, well, Bigtown."
 available_actions = [3, 1]
 army = null
 population = null
 hostile = false
-base_strength = null
-population_size = null
+base_strength = 2.0
+population_size = 20.0

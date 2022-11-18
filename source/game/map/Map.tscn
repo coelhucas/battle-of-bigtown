@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://dv81fkrwp28q7"]
+[gd_scene load_steps=37 format=3 uid="uid://bbu1vwo7qnk8m"]
 
 [ext_resource type="PackedScene" uid="uid://bjt5e50raeltk" path="res://source/game/map/MapNode.tscn" id="1_hiocq"]
 [ext_resource type="Script" path="res://source/game/map/Map.gd" id="1_nqorq"]
@@ -17,13 +17,17 @@
 [ext_resource type="PackedScene" uid="uid://dhykqpco4vjxi" path="res://source/game/hud/Recruit/ChooseUnit.tscn" id="9_gywco"]
 [ext_resource type="Script" path="res://source/game/hud/StatusDisplay.gd" id="10_1b703"]
 [ext_resource type="Texture2D" uid="uid://7nwcmulb25nf" path="res://assets/props/treePinesSmall.png" id="10_gp0b6"]
-[ext_resource type="Resource" uid="uid://m5aeqd4vwhww" path="res://data/locations/camp.tres" id="11_4xaoi"]
+[ext_resource type="Resource" uid="uid://dsm3bwhjh2bkd" path="res://data/locations/camp.tres" id="11_4xaoi"]
+[ext_resource type="Resource" uid="uid://m5aeqd4vwhww" path="res://data/locations/lindos_farm.tres" id="11_6go11"]
 [ext_resource type="Texture2D" uid="uid://dwj44m7dil84x" path="res://assets/props/campfire.png" id="11_do8x2"]
 [ext_resource type="Script" path="res://source/game/map/Interface.gd" id="11_yw83g"]
 [ext_resource type="Resource" uid="uid://drsr4nlxk1i55" path="res://data/locations/death_woods.tres" id="13_we0pa"]
 [ext_resource type="Texture2D" uid="uid://wuq5d5owamb" path="res://assets/props/treePine.png" id="14_js8pn"]
 [ext_resource type="Theme" uid="uid://bgrllsi3i5dkj" path="res://assets/theme/default.tres" id="15_6utmg"]
+[ext_resource type="Texture2D" uid="uid://dqshjc8usyh7v" path="res://assets/props/mill.png" id="17_bqqax"]
+[ext_resource type="Resource" uid="uid://c5uhaojfk63h6" path="res://data/locations/soulstone.tres" id="17_mwcus"]
 [ext_resource type="Theme" uid="uid://cw0fb2cqqyu1c" path="res://assets/theme/secondary.tres" id="18_tsemm"]
+[ext_resource type="Texture2D" uid="uid://5hkhbwypjfjm" path="res://assets/props/rocksTall.png" id="19_o5kuj"]
 [ext_resource type="Texture2D" uid="uid://cdcobp6vf1qly" path="res://assets/bar_bg.png" id="20_k4e7q"]
 [ext_resource type="Texture2D" uid="uid://jyn5h0jii3rx" path="res://assets/nine-patch.png" id="21_1qqg1"]
 [ext_resource type="Texture2D" uid="uid://dr3obalr85jra" path="res://assets/bar_fg.png" id="21_kptya"]
@@ -92,38 +96,38 @@ texture = ExtResource("8_3lxgt")
 [node name="BanditCamp" parent="Nodes" instance=ExtResource("1_hiocq")]
 position = Vector2(910, 115)
 location = ExtResource("9_bbo7h")
-goes_to = [NodePath("../DeathWoods")]
+goes_to = [NodePath("../Deathwoods")]
 texture = ExtResource("8_5n7cs")
 
 [node name="Camp" parent="Nodes" instance=ExtResource("1_hiocq")]
 position = Vector2(703, 378)
 location = ExtResource("11_4xaoi")
-goes_to = [NodePath("../DeathWoods")]
+goes_to = [NodePath("../Deathwoods")]
 texture = ExtResource("11_do8x2")
 
-[node name="DeathWoods" parent="Nodes" instance=ExtResource("1_hiocq")]
+[node name="Deathwoods" parent="Nodes" instance=ExtResource("1_hiocq")]
 position = Vector2(896, 501)
 location = ExtResource("13_we0pa")
-goes_to = [NodePath("../Smalltown"), NodePath("../MapNode8")]
+goes_to = [NodePath("../Smalltown"), NodePath("../Lindofarm")]
 texture = ExtResource("14_js8pn")
 
 [node name="Smalltown" parent="Nodes" instance=ExtResource("1_hiocq")]
 position = Vector2(648, 643)
 location = ExtResource("3_4rjre")
-goes_to = [NodePath("../MapNode9")]
+goes_to = [NodePath("../Soulstone")]
 texture = ExtResource("6_6b4aw")
 
-[node name="MapNode8" parent="Nodes" instance=ExtResource("1_hiocq")]
+[node name="Lindofarm" parent="Nodes" instance=ExtResource("1_hiocq")]
 position = Vector2(536, 477)
-location = ExtResource("11_4xaoi")
-goes_to = [NodePath("../MapNode9")]
-texture = ExtResource("11_do8x2")
+location = ExtResource("11_6go11")
+goes_to = [NodePath("../Soulstone")]
+texture = ExtResource("17_bqqax")
 
-[node name="MapNode9" parent="Nodes" instance=ExtResource("1_hiocq")]
+[node name="Soulstone" parent="Nodes" instance=ExtResource("1_hiocq")]
 position = Vector2(265, 577)
-location = ExtResource("11_4xaoi")
+location = ExtResource("17_mwcus")
 goes_to = [NodePath("../Bigtown")]
-texture = ExtResource("11_do8x2")
+texture = ExtResource("19_o5kuj")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -134,17 +138,20 @@ theme = ExtResource("15_6utmg")
 script = ExtResource("11_yw83g")
 
 [node name="LocationMenu" type="MarginContainer" parent="Control"]
+layout_mode = 0
 offset_left = 1007.0
 offset_right = 1279.0
 offset_bottom = 716.0
 script = ExtResource("3_q0o3h")
 
 [node name="Background" type="ColorRect" parent="Control/LocationMenu"]
+layout_mode = 2
 offset_right = 272.0
 offset_bottom = 716.0
 color = Color(0.227451, 0.227451, 0.227451, 1)
 
 [node name="CenterContainer" type="MarginContainer" parent="Control/LocationMenu"]
+layout_mode = 2
 offset_right = 272.0
 offset_bottom = 716.0
 theme_override_constants/margin_left = 8
@@ -154,17 +161,20 @@ theme_override_constants/margin_bottom = 8
 
 [node name="Information" type="VBoxContainer" parent="Control/LocationMenu/CenterContainer"]
 custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 264.0
 offset_bottom = 708.0
 
 [node name="PlaceName" type="Label" parent="Control/LocationMenu/CenterContainer/Information"]
+layout_mode = 2
 offset_right = 256.0
 offset_bottom = 33.0
 text = "Smalltown"
 
 [node name="PlaceDescription" type="Label" parent="Control/LocationMenu/CenterContainer/Information"]
+layout_mode = 2
 offset_top = 37.0
 offset_right = 256.0
 offset_bottom = 192.0
@@ -173,11 +183,13 @@ text = "dubidubid ubi dbudibdubidbudibdubdibdu dubi dbud ibud iubdiubdi ubidu iu
 autowrap_mode = 2
 
 [node name="AvailableActions" type="VBoxContainer" parent="Control/LocationMenu/CenterContainer/Information"]
+layout_mode = 2
 offset_top = 196.0
 offset_right = 256.0
 offset_bottom = 360.0
 
 [node name="Raid" type="Button" parent="Control/LocationMenu/CenterContainer/Information/AvailableActions"]
+layout_mode = 2
 offset_right = 256.0
 offset_bottom = 38.0
 text = "raid"
@@ -185,6 +197,7 @@ script = ExtResource("6_aspfx")
 action = 0
 
 [node name="Trade" type="Button" parent="Control/LocationMenu/CenterContainer/Information/AvailableActions"]
+layout_mode = 2
 offset_top = 42.0
 offset_right = 256.0
 offset_bottom = 80.0
@@ -193,6 +206,7 @@ script = ExtResource("6_aspfx")
 action = 2
 
 [node name="Recruit" type="Button" parent="Control/LocationMenu/CenterContainer/Information/AvailableActions"]
+layout_mode = 2
 offset_top = 84.0
 offset_right = 256.0
 offset_bottom = 122.0
@@ -201,6 +215,7 @@ script = ExtResource("6_aspfx")
 action = 3
 
 [node name="Rest" type="Button" parent="Control/LocationMenu/CenterContainer/Information/AvailableActions"]
+layout_mode = 2
 offset_top = 126.0
 offset_right = 256.0
 offset_bottom = 164.0
@@ -209,28 +224,33 @@ script = ExtResource("6_aspfx")
 action = 1
 
 [node name="ControlsDisplay" type="HBoxContainer" parent="Control"]
+layout_mode = 0
 offset_left = 9.0
 offset_top = 669.0
 offset_right = 209.0
 offset_bottom = 709.0
 
 [node name="Action1" type="Label" parent="Control/ControlsDisplay"]
+layout_mode = 2
 offset_top = 3.0
 offset_right = 89.0
 offset_bottom = 36.0
 text = "Z Select"
 
 [node name="Action2" type="Label" parent="Control/ControlsDisplay"]
+layout_mode = 2
 offset_left = 93.0
 offset_top = 5.0
 offset_right = 94.0
 offset_bottom = 35.0
 
 [node name="ChooseUnit" parent="Control" instance=ExtResource("9_gywco")]
+layout_mode = 0
 offset_right = 1281.0
 offset_bottom = 718.0
 
 [node name="StatusDisplay" type="HBoxContainer" parent="Control"]
+layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 368.0
@@ -239,29 +259,34 @@ alignment = 1
 script = ExtResource("10_1b703")
 
 [node name="GoldIndicator" type="Label" parent="Control/StatusDisplay"]
+layout_mode = 2
 offset_right = 55.0
 offset_bottom = 33.0
 text = "Gold:"
 
 [node name="Gold" type="Label" parent="Control/StatusDisplay"]
+layout_mode = 2
 offset_left = 59.0
 offset_right = 95.0
 offset_bottom = 33.0
 text = "100"
 
 [node name="PopulationIndicator" type="Label" parent="Control/StatusDisplay"]
+layout_mode = 2
 offset_left = 99.0
 offset_right = 224.0
 offset_bottom = 33.0
 text = "Population:"
 
 [node name="Population" type="Label" parent="Control/StatusDisplay"]
+layout_mode = 2
 offset_left = 228.0
 offset_right = 242.0
 offset_bottom = 33.0
 text = "0"
 
 [node name="Food" type="Label" parent="Control/StatusDisplay"]
+layout_mode = 2
 offset_left = 246.0
 offset_right = 306.0
 offset_bottom = 33.0
@@ -270,6 +295,7 @@ text = "Food:"
 [node name="FoodBar" type="TextureProgressBar" parent="Control/StatusDisplay"]
 texture_filter = 1
 custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
 offset_left = 310.0
 offset_right = 410.0
 offset_bottom = 33.0
@@ -284,6 +310,7 @@ texture_under = ExtResource("20_k4e7q")
 texture_progress = ExtResource("21_kptya")
 
 [node name="Label" type="Label" parent="Control/StatusDisplay/FoodBar"]
+layout_mode = 0
 offset_right = 100.0
 offset_bottom = 26.0
 text = "10/10"
@@ -291,12 +318,14 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Actions" type="Label" parent="Control/StatusDisplay"]
+layout_mode = 2
 offset_left = 414.0
 offset_right = 456.0
 offset_bottom = 33.0
 text = "0/2"
 
 [node name="TargetName" type="Label" parent="Control"]
+layout_mode = 0
 offset_right = 1280.0
 offset_bottom = 120.0
 horizontal_alignment = 1
@@ -304,17 +333,20 @@ vertical_alignment = 1
 
 [node name="Notification" type="CenterContainer" parent="Control"]
 custom_minimum_size = Vector2(1280, 720)
+layout_mode = 0
 offset_right = 1280.0
 offset_bottom = 720.0
 script = ExtResource("8_lcl62")
 
 [node name="Backgrounds1" type="ColorRect" parent="Control/Notification"]
 custom_minimum_size = Vector2(1280, 720)
+layout_mode = 2
 offset_right = 1280.0
 offset_bottom = 720.0
 color = Color(0, 0, 0, 0.192157)
 
 [node name="MarginContainer" type="MarginContainer" parent="Control/Notification"]
+layout_mode = 2
 offset_left = 448.0
 offset_top = 302.0
 offset_right = 832.0
@@ -322,6 +354,7 @@ offset_bottom = 417.0
 
 [node name="NinePatchRect" type="NinePatchRect" parent="Control/Notification/MarginContainer"]
 texture_filter = 1
+layout_mode = 2
 offset_right = 384.0
 offset_bottom = 115.0
 texture = ExtResource("21_1qqg1")
@@ -331,6 +364,7 @@ patch_margin_right = 8
 patch_margin_bottom = 8
 
 [node name="MarginContainer" type="MarginContainer" parent="Control/Notification/MarginContainer"]
+layout_mode = 2
 offset_right = 384.0
 offset_bottom = 115.0
 theme_override_constants/margin_left = 8
@@ -339,12 +373,14 @@ theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/Notification/MarginContainer/MarginContainer"]
+layout_mode = 2
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 376.0
 offset_bottom = 107.0
 
 [node name="Label" type="Label" parent="Control/Notification/MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
 offset_right = 368.0
 offset_bottom = 62.0
 theme = ExtResource("18_tsemm")
@@ -352,6 +388,7 @@ text = "Action points restored
 Party consumed XXX food"
 
 [node name="ActionInstruction" type="Label" parent="Control/Notification/MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
 offset_top = 66.0
 offset_right = 368.0
 offset_bottom = 99.0
@@ -366,6 +403,7 @@ volume_db = -15.0
 
 [node name="RestMenu" type="ColorRect" parent="Control"]
 custom_minimum_size = Vector2(1280, 720)
+layout_mode = 0
 offset_right = 1280.0
 offset_bottom = 720.0
 color = Color(0.0823529, 0.0823529, 0.0823529, 0)

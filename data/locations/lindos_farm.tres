@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://m5aeqd4vwhww"]
+
+[ext_resource type="Script" path="res://source/game/map/GameLocation.gd" id="1_8i2ew"]
+
+[resource]
+script = ExtResource("1_8i2ew")
+name = "Lindo's Farm"
+description = "The Lindo's family are the biggest bread producer from the country."
+available_actions = [3, 1]
+army = []
+population = null
+hostile = false
+base_strength = null
+population_size = null

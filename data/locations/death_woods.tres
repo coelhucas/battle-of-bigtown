@@ -10,5 +10,5 @@ available_actions = [0, 1]
 army = []
 population = null
 hostile = true
-base_strength = null
-population_size = null
+base_strength = 3.195
+population_size = 40.0
