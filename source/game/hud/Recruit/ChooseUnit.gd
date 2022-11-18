@@ -1,5 +1,6 @@
 extends CenterContainer
 
+@onready var window := $MarginContainer
 @onready var container := $MarginContainer/MarginContainer/Container
 @onready var label_availability := $Label
 @onready var sfx_confirm := $SfxConfirm
@@ -63,6 +64,7 @@ func show_options(_options: Array[UnitStats]) -> void:
 		_last_child.remove_separator()
 #	container.get_child(_selected_option).selection_indicator.show()
 	label_availability.visible = _options.is_empty()
+	window.visible = not _options.is_empty()
 
 func _on_purchased(_unit: UnitStats) -> void:
 	origin.remove_unit(_unit)

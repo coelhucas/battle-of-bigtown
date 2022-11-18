@@ -31,8 +31,12 @@
 - [x] Show locations army size
 ~~- [ ] Punish player on defeat~~
 - [x] Spawn archers behind warriors
-- [ ] Check for collisions before spawning
+- [x] Fix decimal number to 2
+- [x] Let player buy food from vilage
+- [x] Add RAID for Smalltown
+- [x] Fix hiring window appearing when empty
 
+- [ ] Check for collisions before spawning
 ----
 
 otla

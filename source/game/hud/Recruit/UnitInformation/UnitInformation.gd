@@ -17,7 +17,7 @@ func display(_stats: UnitStats):
 	stats = _stats
 	label_name.text = _stats.name
 	label_hp.text = str(_stats.hp)
-	label_attack.text = str(_stats.damage)
+	label_attack.text = str(_stats.damage).pad_decimals(2)
 	label_price.text = "Hire (-%s)" % str(_stats.price)
 	label_price.modulate = Color.GREEN if Globals.gold >= _stats.price else Color.RED
 	label_role.text = Enums.Class.keys()[_stats.role].capitalize()

@@ -11,7 +11,7 @@ extends Node
 @onready var result_screen := $UI/ResultScreen
 
 var last_location: GameLocation
-var gold := 50:
+var gold := 1000:
 	set(_gold):
 		gold = _gold
 		Globals.gold = gold
