@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://4q0ulsbcrisf"]
+[gd_scene load_steps=7 format=3 uid="uid://4q0ulsbcrisf"]
 
 [ext_resource type="Script" path="res://source/game/hud/ResultScreen/ResultScreen.gd" id="1_aq0dl"]
 [ext_resource type="Theme" uid="uid://bgrllsi3i5dkj" path="res://assets/theme/default.tres" id="1_qccb2"]
 [ext_resource type="Theme" uid="uid://cw0fb2cqqyu1c" path="res://assets/theme/secondary.tres" id="3_4d6oe"]
+[ext_resource type="Texture2D" uid="uid://jyn5h0jii3rx" path="res://assets/nine-patch.png" id="3_5ryqq"]
 [ext_resource type="AudioStream" uid="uid://0cxympltexln" path="res://assets/sound/fx_bard_won.wav" id="4_ul84g"]
 [ext_resource type="AudioStream" uid="uid://b10ov6pe133os" path="res://assets/sound/fx_fanfare_lost.wav" id="5_m4poq"]
 
@@ -16,18 +17,25 @@ theme = ExtResource("1_qccb2")
 script = ExtResource("1_aq0dl")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
 offset_left = 416.0
 offset_top = 257.0
 offset_right = 864.0
 offset_bottom = 462.0
 pivot_offset = Vector2(58, 32)
 
-[node name="ColorRect" type="ColorRect" parent="MarginContainer"]
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer"]
+layout_mode = 2
 offset_right = 448.0
 offset_bottom = 205.0
-color = Color(0.2, 0.2, 0.2, 1)
+texture = ExtResource("3_5ryqq")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
+layout_mode = 2
 offset_right = 448.0
 offset_bottom = 205.0
 theme_override_constants/margin_left = 8
@@ -36,84 +44,99 @@ theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer"]
+layout_mode = 2
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 440.0
 offset_bottom = 197.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
 offset_right = 432.0
 offset_bottom = 152.0
 theme = ExtResource("3_4d6oe")
 
 [node name="Result" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
 offset_right = 432.0
 offset_bottom = 31.0
 theme = ExtResource("3_4d6oe")
 text = "--- You lost the battle ---"
 
 [node name="HSeparator2" type="HSeparator" parent="MarginContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
 offset_top = 35.0
 offset_right = 432.0
 offset_bottom = 39.0
 
 [node name="Kills" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
 offset_top = 43.0
 offset_right = 432.0
 offset_bottom = 74.0
 
 [node name="Label" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/Kills"]
+layout_mode = 2
 offset_right = 412.0
 offset_bottom = 31.0
 size_flags_horizontal = 3
 text = "Kills"
 
 [node name="Value" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/Kills"]
+layout_mode = 2
 offset_left = 416.0
 offset_right = 432.0
 offset_bottom = 31.0
 text = "0"
 
 [node name="Casualties" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
 offset_top = 78.0
 offset_right = 432.0
 offset_bottom = 109.0
 
 [node name="Label" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/Casualties"]
+layout_mode = 2
 offset_right = 412.0
 offset_bottom = 31.0
 size_flags_horizontal = 3
 text = "Casualties"
 
 [node name="Value" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/Casualties"]
+layout_mode = 2
 offset_left = 416.0
 offset_right = 432.0
 offset_bottom = 31.0
 text = "0"
 
 [node name="Gold" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
 offset_top = 113.0
 offset_right = 432.0
 offset_bottom = 144.0
 
 [node name="Label" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/Gold"]
+layout_mode = 2
 offset_right = 412.0
 offset_bottom = 31.0
 size_flags_horizontal = 3
 text = "Gold"
 
 [node name="Value" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/Gold"]
+layout_mode = 2
 offset_left = 416.0
 offset_right = 432.0
 offset_bottom = 31.0
 text = "0"
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
 offset_top = 148.0
 offset_right = 432.0
 offset_bottom = 152.0
 
 [node name="Label" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
 offset_top = 156.0
 offset_right = 432.0
 offset_bottom = 189.0

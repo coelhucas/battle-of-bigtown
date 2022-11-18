@@ -23,14 +23,14 @@
 
 - [x] Add ranged unit // holy shit they're OP
 - [x] Create last 3 locations in game
+- [x] Add an ending (win a battle against smalltown?)
+- [x] Improve interfaces
 
-- [ ] Add an ending (win a battle against smalltown?)
 - [ ] Fix horizontal input for giving orders
 - [ ] Punish player on defeat
 - [ ] Check for collisions before spawning
 - [ ] Add food
     - [ ] Hunger debuff
-- [ ] Improve interfaces
 
 ----
 

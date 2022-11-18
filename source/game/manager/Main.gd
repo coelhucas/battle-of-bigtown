@@ -53,6 +53,9 @@ func _on_left_battle(_winner: Enums.Team):
 	var _map_scene: Node2D = world.change_scene(map)
 	_map_scene.set_location(last_location, true)
 	result_screen.close()
+
+	if _winner == Enums.Team.PLAYER and last_location.name.contains("Bigtown"):
+		EventBus.emit_signal("finished_game")
 	
 	for member in world.party:
 		member.reset()

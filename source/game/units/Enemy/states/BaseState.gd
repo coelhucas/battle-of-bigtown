@@ -6,11 +6,11 @@ var player: CharacterBody2D
 
 func enter() -> void:
 	var _suffix := ""
-	if player.stats.role == Enums.Class.RANGED:
+	if player.stats.role == Enums.Class.RANGED and animation.contains("attack"):
 		_suffix += "_ranged"
 	match player.creature:
 		Enums.Creature.HUMAN:
-			_suffix = "_human"
+			_suffix += "_human"
 	
 	if animation:
 		player.animation.play(animation + _suffix)

@@ -6,9 +6,9 @@
 script = ExtResource("1_sw52l")
 name = "Bigtown"
 description = "This is the capital. They say that whoever in charge of this town can command the entire country. Who would be able to fight them, though?"
-available_actions = [3, 1]
+available_actions = [0, 3, 1]
 army = null
 population = null
 hostile = false
 base_strength = 5.0
-population_size = 100.0
+population_size = 20.0

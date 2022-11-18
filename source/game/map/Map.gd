@@ -70,6 +70,9 @@ func setup(_world: WorldManager):
 	world = _world
 	connect(start_battle.get_name(), _world.start_battle)
 	status_display.update_initials(_world.game_manager.used_actions, Globals.gold, Globals.population)
+	EventBus.connect("finished_game", func():
+		notification.show_notification(Enums.Notification.WON_GAME)
+	)
 
 
 func set_location(_loc: GameLocation, _reset_current_location: bool = false):
