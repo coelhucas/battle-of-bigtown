@@ -22,8 +22,8 @@
 [ext_resource type="AudioStream" uid="uid://hxa1j46mdlsk" path="res://assets/sound/fx_attack.ogg" id="20_fqtkg"]
 [ext_resource type="AudioStream" uid="uid://qvmky2rn0psw" path="res://assets/sound/fx_defend.ogg" id="21_163bk"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_s37hy"]
-radius = 2.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1ppq3"]
+size = Vector2(4, 4)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_23fid"]
 size = Vector2(128, 128)
@@ -174,9 +174,8 @@ script = ExtResource("1_0pmxq")
 stats = ExtResource("2_i5lbw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0, -2)
-shape = SubResource("CircleShape2D_s37hy")
+shape = SubResource("RectangleShape2D_1ppq3")
 
 [node name="StateManager" type="Node" parent="." node_paths=PackedStringArray("initial_state", "look_for_target_state", "retreat_state", "cheer_state")]
 script = ExtResource("2_b4uvq")

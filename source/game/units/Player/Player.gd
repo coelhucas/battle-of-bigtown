@@ -136,7 +136,7 @@ func _physics_process(delta):
 
 	if not selecting_order or not playable:
 		if direction.x != 0:
-			facing_dir = direction.x
+			facing_dir = sign(direction.x)
 		
 		if direction:
 			move_and_slide()

@@ -69,7 +69,6 @@ var world: WorldManager
 func setup(_world: WorldManager):
 	world = _world
 	connect(start_battle.get_name(), _world.start_battle)
-	EventBus.connect("update_actions", _on_update_actions)
 	status_display.update_initials(_world.game_manager.used_actions, Globals.gold, Globals.population)
 
 
@@ -144,7 +143,12 @@ func _on_selected_action(_action: Enums.Action):
 		Enums.Action.RAID:
 			if Globals.used_actions >= Globals.MAX_ACTIONS:
 				notification.show_notification(Enums.Notification.DEBUFF_TIRED)
+				for unit in world.party:
+					(unit as UnitStats).add_buff(Enums.Buff.TIRED)
 				await notification.acknowledged
+			else:
+				for unit in world.party:
+					(unit as UnitStats).remove_buff(Enums.Buff.TIRED)
 			emit_signal(start_battle.get_name(), current_node)
 		Enums.Action.RECRUIT:
 			recruiting_menu.origin = current_node
@@ -165,9 +169,3 @@ func _draw() -> void:
 		var _color: Color = Color.YELLOW if node.is_current else Color.WHITE
 		for location in (node as MapNode).locations:
 			draw_line(node.position, location.global_position - global_position, _color, 3.0)
-
-func _on_update_actions(_actions) -> void:
-	if Globals.used_actions >= Globals.MAX_ACTIONS:
-		print("Debuffing party")
-		for unit in world.party:
-			(unit as UnitStats).add_buff(Enums.Buff.TIRED)

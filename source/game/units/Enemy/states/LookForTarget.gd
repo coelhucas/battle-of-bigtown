@@ -31,7 +31,6 @@ func exit() -> void:
 
 
 func update() -> BaseEnemyState:
-	if not is_instance_valid(player): return null
 	if not player.fov_radius.monitoring:
 		player.fov_radius.monitoring = true
 	

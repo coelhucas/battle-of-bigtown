@@ -17,9 +17,10 @@
 - [x] Enable resting after battling a hostile place
     - [x] Wait player leave node before creating new population
 
-- [ ] Tiredness debuff
+- [x] Tiredness debuff
     [x] Notification
-    [ ] Actual debuff on units
+    [x] Actual debuff on units
+- [x] Improve performance
 
 - [ ] Check for collisions before spawning
 - [ ] Improve interfaces
