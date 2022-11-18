@@ -28,7 +28,7 @@ func get_closest_enemy() -> CharacterBody2D:
 func update() -> BasePlayerState:
 	if is_instance_valid(player.target):
 		player.direction = player.global_position.direction_to(player.target.global_position)
-		if player.global_position.distance_to(player.target.global_position) <= player.attack_range:
+		if player.global_position.distance_to(player.target.global_position) <= player.range:
 			return attack_state
 	elif player.fov_radius.has_overlapping_bodies():
 		player.target = get_closest_enemy()

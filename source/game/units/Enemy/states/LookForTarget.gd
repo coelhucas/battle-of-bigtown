@@ -41,7 +41,7 @@ func update() -> BaseEnemyState:
 			player.target = null
 			return null
 		
-		if player.global_position.distance_to(player.target.global_position) <= player.attack_range:
+		if player.global_position.distance_to(player.target.global_position) <= player.range:
 			player.fov_radius.monitoring = false
 			return attack_state
 	elif player.fov_radius.has_overlapping_bodies():

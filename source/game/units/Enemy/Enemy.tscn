@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://jjywkee5j1h3"]
+[gd_scene load_steps=18 format=3 uid="uid://jjywkee5j1h3"]
 
 [ext_resource type="Script" path="res://source/game/units/Enemy/Enemy.gd" id="1_i36l4"]
 [ext_resource type="Resource" uid="uid://d0c8yvlikoohk" path="res://data/stats/dummy.tres" id="2_284mq"]
@@ -82,11 +82,27 @@ tracks/0/keys = {
 "values": [0, 1]
 }
 
+[sub_resource type="Animation" id="Animation_fm30s"]
+resource_name = "attack_ranged_human"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [12, 13, 14]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qpjnb"]
 _data = {
 "RESET": SubResource("Animation_lw3gc"),
 "attack": SubResource("Animation_6qbdt"),
 "attack_human": SubResource("Animation_xvs0k"),
+"attack_ranged_human": SubResource("Animation_fm30s"),
 "idle_human": SubResource("Animation_4fdus"),
 "walk_human": SubResource("Animation_cxdx6")
 }
@@ -103,7 +119,7 @@ modulate = Color(0.996078, 0.0901961, 0.270588, 1)
 texture_filter = 1
 position = Vector2(0, -3)
 texture = ExtResource("3_6e66e")
-hframes = 12
+hframes = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -1.5)

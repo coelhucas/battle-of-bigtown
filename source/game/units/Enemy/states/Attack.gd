@@ -14,8 +14,7 @@ func exit() -> void:
 
 func animation_finished() -> BaseEnemyState:
 	if is_instance_valid(player.target):
-		
-		if player.global_position.distance_to(player.target.global_position) <= player.attack_range:
+		if player.global_position.distance_to(player.target.global_position) <= player.range:
 			if player.stats.has_hit():
 				player.target.stats.take_damage(player.stats.damage)
 			return self

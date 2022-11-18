@@ -11,7 +11,6 @@ signal command(action)
 			set_process_input(true)
 			avoid_solids.queue_free()
 			move_speed = PLAYER_SPEED
-@export var attack_range := 8
 @export var stats: UnitStats
 @onready var sprite := $Sprite2D
 @onready var cheering_sounds := $CheerAudios
@@ -30,7 +29,10 @@ signal command(action)
 
 const AI_SPEED = 40.0
 const PLAYER_SPEED := 60.0
+const MELEE_RANGE := 8
+const RANGED_RANGE := 128
 
+var range := MELEE_RANGE
 var units_in_command_range: Array
 var move_speed := AI_SPEED
 var facing_dir := 1.0:
@@ -58,6 +60,9 @@ func _ready() -> void:
 func setup_stats() -> void:
 	stats.make_a_name()
 	stats.connect("died", _on_died)
+	
+	if stats.role == Enums.Class.RANGED:
+		range = RANGED_RANGE
 
 
 func get_units_in_range() -> Array:

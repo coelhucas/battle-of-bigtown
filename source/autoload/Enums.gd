@@ -42,3 +42,8 @@ enum Buff {
 	HUNGER,
 	TIRED,
 }
+
+enum Class {
+	MELEE,
+	RANGED
+}

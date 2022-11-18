@@ -12,10 +12,13 @@ const SPEED := 40.0
 @export var stats: UnitStats
 @export var creature: Enums.Creature
 
+const MELEE_RANGE := 8
+const RANGED_RANGE := 128
 
 var target: CollisionObject2D
 var direction: Vector2
-var attack_range := 8
+var range := MELEE_RANGE
+
 var hp := 5:
 	set(_hp):
 		hp = _hp
@@ -31,6 +34,9 @@ func _ready() -> void:
 func setup_stats() -> void:
 	stats.make_a_name()
 	stats.connect("died", _on_died)
+	
+	if stats.role == Enums.Class.RANGED:
+		range = RANGED_RANGE
 
 func _physics_process(delta):
 	if direction.x < 0:

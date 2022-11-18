@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://dnrjt1f7bs02w"]
+[gd_scene load_steps=34 format=3 uid="uid://dnrjt1f7bs02w"]
 
 [ext_resource type="Script" path="res://source/game/units/Player/Player.gd" id="1_0pmxq"]
 [ext_resource type="Script" path="res://source/game/units/Player/StateManager.gd" id="2_b4uvq"]
@@ -155,10 +155,27 @@ tracks/0/keys = {
 "values": [5, 6, 5, 7]
 }
 
+[sub_resource type="Animation" id="Animation_hn38v"]
+resource_name = "attack_ranged"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [12, 13, 14]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ctjjc"]
 _data = {
 "RESET": SubResource("Animation_epsc0"),
 "attack": SubResource("Animation_u3qaw"),
+"attack_ranged": SubResource("Animation_hn38v"),
 "cheer": SubResource("Animation_kdnja"),
 "idle": SubResource("Animation_15m7l"),
 "idle_playable": SubResource("Animation_pxk75"),
@@ -257,7 +274,7 @@ shape = SubResource("CircleShape2D_nyv6q")
 texture_filter = 1
 position = Vector2(0, -3)
 texture = ExtResource("11_igbnt")
-hframes = 12
+hframes = 15
 frame = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

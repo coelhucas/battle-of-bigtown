@@ -21,6 +21,8 @@
 - [x] Improve performance
 - [x] Make places get stronger after each "turn"
 
+- [x] Add ranged unit // holy shit they're OP
+
 - [ ] Create last 3 locations in game
 - [ ] Improve interfaces
 - [ ] Add an ending (win a battle against smalltown?)

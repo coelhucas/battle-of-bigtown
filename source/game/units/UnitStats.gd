@@ -23,6 +23,7 @@ signal aggro()
 var buffs: Array[Enums.Buff]
 var defending := false
 var max_hp := hp
+var role: Enums.Class = Enums.Class.MELEE
 
 func make_a_name() -> void:
 	randomize()

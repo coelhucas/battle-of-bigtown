@@ -8,7 +8,7 @@
 modulate = Color(1, 1, 1, 0.407843)
 texture_filter = 1
 texture = ExtResource("1_272je")
-hframes = 12
+hframes = 15
 frame = 11
 
 [node name="Blood" type="Sprite2D" parent="."]

@@ -36,9 +36,14 @@ func start_battle(_node: MapNode) -> void:
 
 func generate_debug_party(_amount: int, base_strength: float = 1.0) -> void:
 	for i in _amount:
+		var _chance := randf_range(0.0, 100.00)
 		var _unit: UnitStats = UnitStats.new()
 		_unit.make_a_name()
 		_unit.damage = 1.5 * clamp(randi_range(base_strength - 3, base_strength + 3), 1, 10)
 		_unit.max_hp = 10 * clamp(randi_range(base_strength - 3, base_strength + 3), 1, 10)
 		_unit.hp = _unit.max_hp
+		
+		if _chance < 30:
+			_unit.role = Enums.Class.RANGED
+		
 		party.append(_unit)

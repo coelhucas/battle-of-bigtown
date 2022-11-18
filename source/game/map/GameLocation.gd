@@ -18,18 +18,24 @@ var available_for_hire: Array[UnitStats]
 var base_price := 5
 
 func generate_population() -> void:
+	randomize()
 	if army.size() < population_size / 2:
 		army = []
 	else:
 		return
 
 	for i in population_size:
+		var _chance := randf_range(0.0, 100.0)
 		var _unit: UnitStats = UnitStats.new()
 		_unit.make_a_name()
 		_unit.damage = 1.5 * clamp(randi_range(base_strength - 3, base_strength + 3), 1, 10)
 		_unit.max_hp = 10 * clamp(randi_range(base_strength - 3, base_strength + 3), 1, 10)
 		_unit.hp = _unit.max_hp
 		_unit.price = int(base_price * _unit.damage / 1.5 * _unit.hp / 10.0)
+		
+		if _chance < 30:
+			_unit.role = Enums.Class.RANGED
+		
 		population.append(_unit)
 	
 	var _army_size := int(population_size * POPULATION_TO_ARMY_RATIO)

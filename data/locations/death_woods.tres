@@ -6,8 +6,9 @@
 script = ExtResource("1_8i2ew")
 name = "Death Woods"
 description = "A place known by its perils and hostility from an unknown people. Doesn't seem safe to stay."
-available_actions = [1]
+available_actions = [0, 1]
 army = []
+population = null
 hostile = true
 base_strength = null
 population_size = null
