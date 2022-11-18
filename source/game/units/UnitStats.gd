@@ -14,7 +14,7 @@ signal aggro()
 	get:
 		var _base_damage: float = damage
 		if self.buffs.has(Enums.Buff.TIRED):
-			_base_damage *= 0.40
+			_base_damage = clamp(_base_damage * 0.4, 1.0, 100.0)
 			
 		if self.buffs.has(Enums.Buff.HEALTHY):
 			_base_damage *= 1.75

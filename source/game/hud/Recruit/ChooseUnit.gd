@@ -58,7 +58,7 @@ func show_options(_options: Array[UnitStats]) -> void:
 		_unit_info.selection_indicator.visible = _idx == _selected_option
 		_idx += 1
 
-	var _last_child: Control = clamp(container.get_child(container.get_child_count() - 1), 0, container.get_child_count())
+	var _last_child: Control = container.get_child(clamp(container.get_child_count() - 1, 0, container.get_child_count()))
 	if is_instance_valid(_last_child) and not _last_child.is_queued_for_deletion():
 		_last_child.remove_separator()
 #	container.get_child(_selected_option).selection_indicator.show()

@@ -43,7 +43,7 @@ func _on_battle_finished(_winner: Enums.Team) -> void:
 
 	
 	if _winner == Enums.Team.PLAYER:
-		var _gold := last_location.get_gold_prize()
+		var _gold := last_location.get_gold_prize(Globals.casualties)
 		Globals.gold += _gold
 		result_screen.open(_winner, _gold)
 	else:
@@ -67,7 +67,7 @@ func _on_saved_last_location(_last_location: MapNode):
 func _on_attempt_purchase(_unit: UnitStats):
 	if Globals.gold >= _unit.price:
 		Globals.gold -= _unit.price
-		world.party.append(_unit.duplicate())
+		world.party.append(_unit)
 		Globals.population = world.party.size()
 		EventBus.emit_signal("purchased", _unit)
 	else:

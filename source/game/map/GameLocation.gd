@@ -48,7 +48,7 @@ func get_for_hire() -> Array[UnitStats]:
 	return available_for_hire
 
 
-func get_gold_prize() -> int:
-	var _value := int(clamp(base_strength, 1, 10) * population_size * 2)
+func get_gold_prize(_casualties: int) -> int:
+	var _value: int = clamp(int(clamp(base_strength, 1, 10) * population_size * 2) - _casualties, 0, 99999999)
 	Globals.earned_gold = _value
 	return _value
