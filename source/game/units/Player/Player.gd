@@ -52,13 +52,12 @@ func _ready() -> void:
 	set_process_input(false)
 	state_manager.init(self)
 	animation.connect("animation_finished", state_manager.animation_finished)
-	stats = stats.duplicate()
-	stats.make_a_name()
-	stats.connect("died", _on_died)
-	
 	for ray in avoid_solids.get_children():
 		ray.add_exception(self)
 	
+func setup_stats() -> void:
+	stats.make_a_name()
+	stats.connect("died", _on_died)
 
 
 func get_units_in_range() -> Array:

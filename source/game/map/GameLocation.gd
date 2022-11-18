@@ -27,7 +27,8 @@ func generate_population() -> void:
 		var _unit: UnitStats = UnitStats.new()
 		_unit.make_a_name()
 		_unit.damage = 1.5 * clamp(randi_range(base_strength - 3, base_strength + 3), 1, 10)
-		_unit.hp = 10 * clamp(randi_range(base_strength - 3, base_strength + 3), 1, 10)
+		_unit.max_hp = 10 * clamp(randi_range(base_strength - 3, base_strength + 3), 1, 10)
+		_unit.hp = _unit.max_hp
 		_unit.price = base_price * _unit.damage / 1.5 * _unit.hp / 10.0
 		population.append(_unit)
 	

@@ -10,12 +10,21 @@ signal aggro()
 		
 		if hp <= 0:
 			emit_signal("died")
-@export var damage := 1.5
+@export var damage := 1.5:
+	get:
+		var _base_damage: float = damage
+		if self.buffs.has(Enums.Buff.TIRED):
+			_base_damage *= 0.40
+		else:
+			_base_damage = 10.0
+		return _base_damage
 @export var price := 1.0
 @export var name: String
 
+# Counts for both buffs and debuffs
+var buffs: Array[Enums.Buff]
 var defending := false
-
+var max_hp := hp
 
 func make_a_name() -> void:
 	randomize()
@@ -41,3 +50,13 @@ func has_hit() -> bool:
 		return false
 	
 	return true
+
+func add_buff(_buff: Enums.Buff):
+	if not buffs.has(_buff):
+		buffs.append(_buff)
+
+func remove_buff(_buff: Enums.Buff):
+	buffs.erase(_buff)
+
+func reset() -> void:
+	hp = max_hp

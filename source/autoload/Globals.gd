@@ -2,7 +2,10 @@ extends Node
 
 const MAX_ACTIONS := 3
 
-var used_actions := 0
+var used_actions := 0:
+	set(_used_actions):
+		used_actions = _used_actions
+		EventBus.emit_signal("update_actions", used_actions)
 var gold := 100:
 	set(_gold):
 		gold = _gold

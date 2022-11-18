@@ -26,7 +26,7 @@ func setup(_world: WorldManager) -> void:
 
 
 
-func spawn_player(_playable: bool = false) -> void:
+func spawn_player(_stats: UnitStats, _playable: bool = false) -> void:
 	var _unit_scene: Node2D = ReferenceStash.SCENE_PLAYER_UNIT.instantiate()
 	add_child(_unit_scene)
 	_unit_scene.global_position = Vector2(
@@ -35,15 +35,19 @@ func spawn_player(_playable: bool = false) -> void:
 	)
 	
 	_unit_scene.playable = _playable
-	_unit_scene.stats.connect("died", _on_unit_died.bind(_unit_scene))
+	_unit_scene.stats = _stats
+	_unit_scene.setup_stats()
+	
+	if not _stats.is_connected("died", _on_unit_died.bind(_unit_scene)):
+		_stats.connect("died", _on_unit_died.bind(_unit_scene))
 
 
 func spawn(_player_party: Array[UnitStats], _enemy_party: Array[UnitStats]) -> void:
 	randomize()
-	for _unit in _player_party:
-		spawn_player()
+	for _stats in _player_party:
+		spawn_player(_stats)
 	
-	spawn_player(true)
+	spawn_player(UnitStats.new(), true)
 		
 		
 	for _unit in _enemy_party:
@@ -53,7 +57,9 @@ func spawn(_player_party: Array[UnitStats], _enemy_party: Array[UnitStats]) -> v
 			enemy_spawn.global_position.x + randi_range(enemy_spawn_area.position.x, enemy_spawn_area.size.x / 2),
 			enemy_spawn.global_position.y + randi_range(enemy_spawn_area.position.y, enemy_spawn_area.size.y / 2),
 		)
+		_unit_scene.stats = _unit
 		_unit_scene.stats.connect("died", _on_unit_died.bind(_unit_scene))
+		_unit_scene.setup_stats()
 
 func _on_unit_died(_scene: CharacterBody2D):
 	var _body: Node2D = ReferenceStash.SCENE_DEAD_BODY.instantiate()

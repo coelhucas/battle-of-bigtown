@@ -51,8 +51,11 @@ func _on_battle_finished(_winner: Enums.Team) -> void:
 
 func _on_left_battle(_winner: Enums.Team):
 	var _map_scene: Node2D = world.change_scene(map)
-	_map_scene.set_location(last_location, _winner == Enums.Team.PLAYER)
+	_map_scene.set_location(last_location, true)
 	result_screen.close()
+	
+	for member in world.party:
+		member.reset()
 	
 
 func _on_saved_last_location(_last_location: MapNode):

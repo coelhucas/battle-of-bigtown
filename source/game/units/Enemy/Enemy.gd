@@ -22,13 +22,15 @@ var hp := 5:
 
 func _ready() -> void:
 	state_manager.init(self)
-	stats = stats.duplicate()
-	stats.make_a_name()
 	animation.connect("animation_finished", state_manager.animation_finished)
-	stats.connect("died",  _on_died)
 	
 	for ray in avoid_solids.get_children():
 		ray.add_exception(self)
+
+
+func setup_stats() -> void:
+	stats.make_a_name()
+	stats.connect("died", _on_died)
 
 func _physics_process(delta):
 	if direction.x < 0:

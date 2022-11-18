@@ -64,8 +64,12 @@ var _state: State = State.SELECTING_NODE:
 		if _state == State.SELECTING_NODE:
 			interface.display_control(Enums.ControlDisplay.ACTION_2_TO_NONE)
 
+var world: WorldManager
+
 func setup(_world: WorldManager):
+	world = _world
 	connect(start_battle.get_name(), _world.start_battle)
+	EventBus.connect("update_actions", _on_update_actions)
 	status_display.update_initials(_world.game_manager.used_actions, Globals.gold, Globals.population)
 
 
@@ -161,3 +165,9 @@ func _draw() -> void:
 		var _color: Color = Color.YELLOW if node.is_current else Color.WHITE
 		for location in (node as MapNode).locations:
 			draw_line(node.position, location.global_position - global_position, _color, 3.0)
+
+func _on_update_actions(_actions) -> void:
+	if Globals.used_actions >= Globals.MAX_ACTIONS:
+		print("Debuffing party")
+		for unit in world.party:
+			(unit as UnitStats).add_buff(Enums.Buff.TIRED)

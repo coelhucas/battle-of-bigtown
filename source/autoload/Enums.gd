@@ -37,3 +37,8 @@ enum Notification {
 	DEBUFF_HUNGRY,
 	DEBUFF_TIRED_AND_HUNGRY
 }
+
+enum Buff {
+	HUNGER,
+	TIRED,
+}
